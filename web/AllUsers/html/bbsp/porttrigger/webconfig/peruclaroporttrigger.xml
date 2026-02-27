@@ -1,0 +1,41 @@
+<InternetGatewayDevice>
+    <WANDevice>
+        <WANConnectionDevice addconfig = "0x00000006" setconfig = "0x00000006" getconfig = "0x00000006">
+            <WANIPConnection setconfig = "0x00000006" addconfig = "0x00000006" delconfig = "0x00000006" getconfig = "0x00000006">
+                <X_HW_PortTrigger setconfig = "0x00000006" addconfig = "0x00000006" delconfig = "0x00000006" getconfig = "0x00000006">
+                    <Enable setconfig = "0x00000006" getconfig = "0x00000006"/>
+                    <TriggerPort setconfig = "0x00000006" getconfig = "0x00000006"/>
+                    <TriggerPortEnd setconfig = "0x00000006" getconfig = "0x00000006"/>
+                    <TriggerProtocol setconfig = "0x00000006" getconfig = "0x00000006"/>
+                    <OpenPort setconfig = "0x00000006" getconfig = "0x00000006"/>
+                    <OpenPortEnd setconfig = "0x00000006" getconfig = "0x00000006"/>
+                    <OpenProtocol setconfig = "0x00000006" getconfig = "0x00000006"/>
+                </X_HW_PortTrigger>
+            </WANIPConnection>
+            <WANPPPConnection setconfig = "0x00000006" addconfig = "0x00000006" delconfig = "0x00000006" getconfig = "0x00000006">
+                <X_HW_PortTrigger setconfig = "0x00000006" addconfig = "0x00000006" delconfig = "0x00000006" getconfig = "0x00000006">
+                    <Enable setconfig = "0x00000006" getconfig = "0x00000006"/>
+                    <TriggerPort setconfig = "0x00000006" getconfig = "0x00000006"/>
+                    <TriggerPortEnd setconfig = "0x00000006" getconfig = "0x00000006"/>
+                    <TriggerProtocol setconfig = "0x00000006" getconfig = "0x00000006"/>
+                    <OpenPort setconfig = "0x00000006" getconfig = "0x00000006"/>
+                    <OpenPortEnd setconfig = "0x00000006" getconfig = "0x00000006"/>
+                    <OpenProtocol setconfig = "0x00000006" getconfig = "0x00000006"/>
+                </X_HW_PortTrigger>
+            </WANPPPConnection>
+        </WANConnectionDevice>
+    </WANDevice>
+    <Services>
+        <X_HW_Bonding>
+            <X_HW_PortTrigger setconfig = "0x00000006" addconfig = "0x00000006" delconfig = "0x00000006" getconfig = "0x00000006">
+                <Enable setconfig = "0x00000006" getconfig = "0x00000006"/>
+                <TriggerPort setconfig = "0x00000006" getconfig = "0x00000006"/>
+                <TriggerPortEnd setconfig = "0x00000006" getconfig = "0x00000006"/>
+                <TriggerProtocol setconfig = "0x00000006" getconfig = "0x00000006"/>
+                <OpenPort setconfig = "0x00000006" getconfig = "0x00000006"/>
+                <OpenPortEnd setconfig = "0x00000006" getconfig = "0x00000006"/>
+                <OpenProtocol setconfig = "0x00000006" getconfig = "0x00000006"/>
+            </X_HW_PortTrigger>
+        </X_HW_Bonding>
+    </Services>
+</InternetGatewayDevice>

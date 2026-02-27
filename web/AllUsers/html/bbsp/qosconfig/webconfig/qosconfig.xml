@@ -1,0 +1,34 @@
+<InternetGatewayDevice> 
+<QueueManagement setconfig = "0x00000003" addconfig = "0x00000003" delconfig = "0x00000003" getconfig = "0x00000003">
+<X_HW_ClassificationEnable setconfig = "0x00000003" getconfig = "0x00000003"/>
+<X_HW_Bandwidth setconfig = "0x00000003" getconfig = "0x00000003"/>
+<X_HW_Down_Bandwidth setconfig = "0x00000003" getconfig = "0x00000003"/>
+<Classification setconfig = "0x00000003" addconfig = "0x00000003" delconfig = "0x00000003" getconfig = "0x00000003">
+<X_HW_Dircetion setconfig = "0x00000003" getconfig = "0x00000003"/>
+<ClassInterface setconfig = "0x00000003" getconfig = "0x00000003"/>
+<SourceMACAddress setconfig = "0x00000003" getconfig = "0x00000003"/>
+<DestMACAddress setconfig = "0x00000003" getconfig = "0x00000003"/>
+<DestIP setconfig = "0x00000003" getconfig = "0x00000003"/>
+<DestMask setconfig = "0x00000003" getconfig = "0x00000003"/>
+<SourceIP setconfig = "0x00000003" getconfig = "0x00000003"/>
+<SourceMask setconfig = "0x00000003" getconfig = "0x00000003"/>
+<Protocol setconfig = "0x00000003" getconfig = "0x00000003"/>
+<DestPort setconfig = "0x00000003" getconfig = "0x00000003"/>
+<DestPortRangeMax setconfig = "0x00000003" getconfig = "0x00000003"/>
+<SourcePort setconfig = "0x00000003" getconfig = "0x00000003"/>
+<SourcePortRangeMax setconfig = "0x00000003" getconfig = "0x00000003"/>
+<DSCPMark setconfig = "0x00000003" getconfig = "0x00000003"/>
+<VLANIDCheck setconfig = "0x00000003" getconfig = "0x00000003"/>
+<EthernetPriorityMark setconfig = "0x00000003" getconfig = "0x00000003"/>
+<X_HW_OutHardwareQueue setconfig = "0x00000003" getconfig = "0x00000003"/>
+<ClassPolicer setconfig = "0x00000003" getconfig = "0x00000003"/>
+</Classification>
+<Policer setconfig = "0x00000003" addconfig = "0x00000003" delconfig = "0x00000003" getconfig = "0x00000003">
+<CommittedRate setconfig = "0x00000003" getconfig = "0x00000003"/>
+<CommittedBurstSize setconfig = "0x00000003" getconfig = "0x00000003"/>
+<PeakRate setconfig = "0x00000003" getconfig = "0x00000003"/>
+<PeakBurstSize setconfig = "0x00000003" getconfig = "0x00000003"/>
+<PolicerEnable setconfig = "0x00000003" getconfig = "0x00000003"/>
+</Policer>
+</QueueManagement>
+</InternetGatewayDevice> 

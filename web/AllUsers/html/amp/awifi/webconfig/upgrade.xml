@@ -1,0 +1,12 @@
+<InternetGatewayDevice> 
+<X_HW_AwifiManage setconfig = "0x00000003">
+<UpdateKey setconfig = "0x00000003"/>
+<UpdateRequestServer setconfig = "0x00000003"/>
+<VersionReportServer setconfig = "0x00000003"/>
+<GatewayPort setconfig = "0x00000003"/>
+<CityCode setconfig = "0x00000003"/>
+</X_HW_AwifiManage>
+<X_HW_DEBUG>
+<aWiFi setconfig = "0x00000003"/>
+</X_HW_DEBUG>
+</InternetGatewayDevice> 

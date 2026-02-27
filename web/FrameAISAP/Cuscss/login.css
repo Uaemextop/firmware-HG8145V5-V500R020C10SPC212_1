@@ -1,0 +1,222 @@
+.container-fluid {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    
+}
+@media only screen and (max-width: 1024px) {
+    .warp-login {
+        margin-top: 30%;
+    }
+
+    .logo {
+        margin-top: 30%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .warp-login {
+        margin-top: 24%;
+    }
+
+    .logo {
+        margin-top: 24%;
+    }
+
+    .input-form-login.username {
+        padding-left: 14%;
+    }
+
+    .input-form-login.password {
+        padding-left: 14%;
+    }
+}
+
+@media only screen and (max-width: 414px) {
+    .warp-login {
+        max-width: 280px;
+    }
+
+    .logo {
+        max-width: 280px;
+    }
+
+    .input-form-login.username {
+        padding-left: 16%;
+    }
+
+    .input-form-login.password {
+        padding-left: 16%;
+    }
+}
+
+@media only screen and (max-width: 375px) {
+    .warp-login {
+        margin-top: 12%;
+    }
+
+    .logo {
+        margin-top: 12%;
+    }
+}
+html,
+body {
+    height: 100%;
+    margin: 0 auto;
+}
+
+* {
+    font-family: "微软雅黑";
+}
+.wrapper {
+    width: 100%;
+    float: left;
+}
+
+.warp-login {
+    width: 448px;
+    padding-top: 4%;
+    padding-bottom: 50px;
+    margin: 0 auto;
+}
+
+.warp-login h3 {
+    font-family: "微软雅黑";
+    font-size: 35px;
+    margin-bottom: 50px;
+    color: #4D4D4D;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.form-login .title {
+    font-family: 'db_helvethaicaais_x65_med';
+    padding-left: 18px;
+    color: #4E4E4E;
+    opacity: 0.6;
+}
+
+.input-form-login {
+    width: 100%;
+    border-radius: 24px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(149, 152, 154, 0.25);
+    height: 47px;
+    font-family: 'db_helvethaicaais_x65_med';
+    font-size: 20px;
+    color: #4E4E4E;
+    line-height: 50px;
+}
+
+.input-form-login.username {
+    background: #F9F9F9 url('../images/ic_person_24px.jpg') no-repeat 5% 50%;
+    padding-left: 12%;
+}
+
+.input-form-login.password {
+    background: #F9F9F9 url('../images/ic_lock_24px.jpg') no-repeat 5% 50%;
+    padding-left: 12%;
+}
+
+.input-form-login.captcha {
+    background: #F9F9F9;
+}
+
+.input-form-login:focus {
+    outline: none;
+}
+
+.btn-signin {
+    height: 40px;
+    background-color: #8DC63F;
+    border-radius: 20px;
+    border: none;
+    color: white;
+    width: 224px;
+    outline: none;
+    cursor: pointer;
+}
+#DivErrPage {
+    width:100%;
+    height:30px;
+    line-height:30px;
+    font-family:"微软雅黑";
+    font-size:14px;
+    text-align:left;
+    color:#ed1212;
+    display:none;
+}
+
+.contentItemlogin {
+    width: 100%;
+    margin-top:12px;
+    height: 34px;
+}
+.contenboxlogin {
+    width: 100%;
+    height: 34px;
+    float:right;
+    text-align:left;
+}
+#DivErrIcon {
+    width:22px;
+    height:30px;
+    float:left;
+    background:url(../images/loginalarm.jpg) no-repeat left;
+}
+#DivErrPromt {
+    height:30px;
+}
+
+input::-webkit-input-placeholder,#DIPAddress::-webkit-input-placeholder {
+    color: #757575;
+    font-weight: bold;
+}
+input:-ms-input-placeholder,#DIPAddress:-ms-input-placeholder { // IE10+
+    color: #757575;
+    font-weight: bold;
+}
+input:-moz-placeholder,#DIPAddress:-moz-placeholder { // Firefox4-18
+    color: #757575;
+    font-weight: bold;
+}
+input::-moz-placeholder,#DIPAddress::-moz-placeholder { // Firefox19+
+    color: #757575;
+    font-weight: bold;
+}
+#DivTip {
+    width: 736px;
+    height: 30px;
+    margin-left: -124px;
+    font-family: "微软雅黑";
+    font-size: 14px;
+    text-align: center;
+    color: #ed1212;
+    display:none;  
+}
+
+.logo {
+    padding-top: 4%;
+    margin: 0 auto;
+}
+
+.attention {
+    font-family: "微软雅黑";
+    margin-bottom: 50px;
+    color: #8DC63F;
+    text-align:center;
+    margin-top: 50px;
+}
+
+.attention div {
+	font-size: 35px; 
+	padding-bottom: 40px;
+}
+
+.button {
+	margin-top: 100px;
+	text-align:center;
+	font-size: 30px; 
+}

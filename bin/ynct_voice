@@ -1,0 +1,18 @@
+#!/bin/sh
+registerError=$(cwmp getvalue InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.Line.1.X_HW_LastRegisterError)
+registeroutput=${registerError##*X_HW_LastRegisterError=}
+case "$registeroutput" in
+"-")
+    registeroutput="Up"
+    ;;
+"ERROR_REGISTRATION_AUTH_FAIL")
+    registeroutput="AuthFailed"
+    ;;
+"ERROR_REGISTRATION_TIME_OUT")
+    registeroutput="RegisterTimeOut"
+    ;;
+"ERROR_ERROR_RESPONSE_RETURNED_BY_CORENET")
+    registeroutput="Error"
+    ;;
+esac
+echo "$registeroutput"

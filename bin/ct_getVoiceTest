@@ -1,0 +1,13 @@
+#! /bin/sh
+
+voicetest=$(cwmp getvalue speccmdvoicetest)
+voiceflag=$(echo "$voicetest" | sed -n '/FLAG=/p')
+if [ ${voiceflag##*FLAG=} = 0 ] ; then 
+	echo "DELAY=NULL"
+	echo "JITTER=NULL"
+	echo "LOST=NULL"
+else
+	voicetestout=$(echo "$voicetest" | sed '1d')
+	echo "$voicetestout"
+fi
+

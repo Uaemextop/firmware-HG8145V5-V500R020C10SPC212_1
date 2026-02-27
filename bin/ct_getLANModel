@@ -1,0 +1,23 @@
+#!/bin/sh
+
+lannumline=$(cwmp getvalue InternetGatewayDevice.LANDevice.1.LANEthernetInterfaceNumberOfEntries)
+lannum=${lannumline##*LANEthernetInterfaceNumberOfEntries=}
+	for i in $(seq 1 $lannum)
+    do
+	lanportline=$(shellconfig InternetGatewayDevice.X_HW_DEBUG.AMP.LANPort.${i}.CommonConfig get)
+	lanstatusline=`echo "$lanportline" | sed -n '/Link:/p'`
+	lanstatus=${lanstatusline##*Link:}
+	if [ $lanstatus -eq 0 ] ; then 
+		lanmode="NOLINK"
+	else
+		duplexline=`echo "$lanportline" | sed -n '/Duplex:/p'`
+		duplex=${duplexline##*Duplex:}
+		if [ $duplex -eq 1 ] ; then 
+		lanmode="FULL_DUPLEX"
+		else 
+		lanmode="HALF_DUPLEX"
+		fi
+	fi
+	lanmodeout=$lanmodeout"/"$lanmode
+	done
+echo "LAN_MODEL="${lanmodeout:1}

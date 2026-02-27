@@ -1,0 +1,15 @@
+<InternetGatewayDevice> 
+<UserInterface setconfig = "0x00000003" getconfig = "0x00000003"> 
+<X_HW_WebUserInfo setconfig = "0x00000003" getconfig = "0x00000003"> 
+<Password setconfig = "0x00000003" getconfig = "0x00000003"/>
+<OldPassword setconfig = "0x00000003" getconfig = "0x00000003"/> 
+</X_HW_WebUserInfo>
+</UserInterface>
+<LANDevice setconfig = "0x00000003" getconfig = "0x00000003">
+<WLANConfiguration setconfig = "0x00000003" getconfig = "0x00000003">
+<PreSharedKey setconfig = "0x00000003" getconfig = "0x00000003">
+<PreSharedKey setconfig = "0x00000003" getconfig = "0x00000003"/>
+</PreSharedKey>
+</WLANConfiguration>
+</LANDevice>
+</InternetGatewayDevice>  

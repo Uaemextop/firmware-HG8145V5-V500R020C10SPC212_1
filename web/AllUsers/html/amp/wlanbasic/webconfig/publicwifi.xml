@@ -1,0 +1,8 @@
+<InternetGatewayDevice> 
+<LANDevice setconfig = "0x00000003">
+<X_HW_WLANForISP setconfig = "0x00000003">
+<KickRssiThreshold setconfig = "0x00000003"/>
+<AccessRssiThreshold setconfig = "0x00000003"/>
+</X_HW_WLANForISP>
+</LANDevice>
+</InternetGatewayDevice> 

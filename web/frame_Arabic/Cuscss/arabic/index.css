@@ -1,0 +1,219 @@
+﻿
+div#main {
+	width: 955px;
+	margin: 0px auto;
+	height: 715px;
+	background: url('../../images/Mobily_AR_bg.jpg') no-repeat center;
+}
+
+div#main div#header {
+	height: 110px;
+}
+
+div#main div#header div#headerContent {
+	float: right;
+	height: 110px;
+	width: 955px;
+}
+div#main div#header div#headerContent div#headerInfo {
+	height: 70px;
+}
+div#main div#header div#headerContent div#headerInfo div {
+	float: right;
+	width: 955px;
+	height: 70px;
+	line-height: 33px;
+	font-family: Tahoma;
+}
+div#main div#header div#headerContent div#headerInfo div#headerInfoSpace {
+	width: 825px;
+}
+
+
+div#main div#header div#headerContent div#headerInfo div#headerlangSelect {
+	height: 30px;
+	width:130px;
+	font-size: 12px;
+	text-align:right;
+	direction:rtl;
+}
+div#main div#header div#headerContent div#headerTab div#headerLogout {
+	height: 19px;
+	width:130px;
+	font-size: 12px;
+}
+
+
+div#main div#header div#headerContent div#headerTab div#headerLogout span {
+	cursor: pointer;
+	color: #0091d3;
+	font-weight: bold;
+}
+
+
+div#main div#header div#headerContent div#headerTab {
+	height: 38px;
+	clear: both;
+	line-height: 38px;
+}
+div#main div#header div#headerContent div#headerTab  div#headerInfoText {
+	width: 130px;
+	line-height:20px;
+}
+div#main div#header div#headerContent div#headerTab ul {
+	padding: 0px;
+	margin: 0px;
+	margin-right:110px;
+	list-style-type: none;
+}
+div#main div#header div#headerContent div#headerTab ul li {
+	height: 38px;
+	float: right;
+	cursor: pointer;
+	font-weight: bold;
+	margin: 0px 3px;
+	direction:rtl;
+}
+div#main div#header div#headerContent div#headerTab ul li div {
+	float: left; 
+}
+div#main div#header div#headerContent div#headerTab ul li div.tabBtnLeft {
+	width: 5px;
+	height: 25px;
+	clear: both;
+}
+div#main div#header div#headerContent div#headerTab ul li div.tabBtnCenter {
+	height: 25px;
+	color: #009AD6;
+}
+div#main div#header div#headerContent div#headerTab ul li div.tabBtnRight {
+	width: 5px;
+	height: 25px;
+}
+
+div#main div#header div#headerContent div#headerContentSpace {
+	height: 11px;
+}
+
+div#main div#header div#headerContent div#headerTab ul li.hover div.tabBtnLeft {
+	width: 10px;
+	height: 25px;
+	clear: both;
+	background-repeat:no-repeat;
+	background-position: 0px 0px;
+}
+
+div#main div#header div#headerContent div#headerTab ul li.hover div.tabBtnCenter {
+	height: 25px;
+	color: #003E56;
+	text-align:right;
+	background-repeat: repeat-x;
+}
+div#main div#header div#headerContent div#headerTab ul li.hover div.tabBtnRight {
+	width: 10px;
+	height: 25px;
+	background-repeat: no-repeat;
+	background-position: -10px 0px;
+}
+
+div#main div#header div#headerSpace {
+	height: 6px;
+	clear: both;
+	line-height: 6px;
+	background-color:#0075b8;
+}
+
+div#main div#mainspace {
+	height: 20px;
+	width: 801px;
+}
+
+div#main div#center {
+	height: 535px;
+	
+}
+div#main div#center div#nav {
+	width: 210px;
+	height: 535px;
+	float:right;  
+	direction:rtl;
+
+}
+div#main div#center div#space {
+	width: 25px;
+	height: 535px;
+	float: right;
+}
+
+div#main div#center div#nav ul {
+	padding: 0px;
+	margin: 0px;
+	margin-right:20px;
+	padding-top:28px;
+	list-style-type: none;
+}
+
+div#main div#center div#nav ul li div {
+	width: 210px;
+	height: 25px;
+	color:#fff; 
+	cursor: pointer;
+	line-height: 25px;
+	font-weight: bold;
+	margin-bottom: 1px; 
+	text-align:right; 
+	float:left;
+}
+
+div#main div#center div#nav ul li.hover div {
+	color:#000 ;
+	font-weight: bold;
+	cursor: pointer;
+}
+div#main div#center div#content2 {
+	float: right;
+	width: 680px;
+	height: 535px;
+	padding-right:8px;
+}
+div#main div#center div#content2  div#ContentSpace {
+	height: 20px;
+}
+
+div#main div#center div#content2 div#frameWarpContent {
+	width: 692px;
+	height: 480px;
+}
+
+div#main div#center div#content2 div#ContentSpace2 {
+	height: 40px;
+}
+
+div#main div#footer {
+	clear: both;
+	height: 25px;
+	color: #434343;
+	text-align: center;
+	background-color: #E2E2E2;
+}
+div#main table {
+	height: 100%;
+	margin: 0px auto;
+}
+
+div#main div#footer #footerText {
+	color: #434343;
+	font-size: 12px;
+	direction:rtl;
+}
+
+div#main div#fresh {
+	display: none;
+}
+
+body {
+	text-align: center;
+	margin: 0px;
+	font-family: Arial;
+	font-size: 12px;
+}

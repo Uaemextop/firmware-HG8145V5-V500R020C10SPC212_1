@@ -1,0 +1,10 @@
+<InternetGatewayDevice> 
+	<LANDevice setconfig = "0x00000003">
+		<X_HW_WLANForISP setconfig = "0x00000003">
+			<EnableUserId setconfig = "0x00000003"/>
+			<UserId setconfig = "0x00000003"/>
+			<WifiShareTimeStats setconfig = "0x00000003"/>
+			<WifiShareMaxClientNumber setconfig = "0x00000003"/>
+		</X_HW_WLANForISP>
+	</LANDevice>
+</InternetGatewayDevice> 

@@ -1,0 +1,13 @@
+<InternetGatewayDevice>
+    <Time setconfig = "0x00000007" getconfig = "0x00000007">
+        <Enable      setconfig = "0x00000007" getconfig = "0x00000007"/>
+        <NTPServer1  setconfig = "0x00000007" getconfig = "0x00000007"/>
+        <NTPServer2  setconfig = "0x00000007" getconfig = "0x00000007"/>
+        <LocalTimeZoneName  setconfig = "0x00000007" getconfig = "0x00000007"/>
+        <X_HW_SynInterval   setconfig = "0x00000007" getconfig = "0x00000007"/>
+        <X_HW_WanName   setconfig = "0x00000007" getconfig = "0x00000007"/>
+        <DaylightSavingsUsed  setconfig = "0x00000007" getconfig = "0x00000007"/>
+        <X_HW_DaylightSavingsStartDate   setconfig = "0x00000007" getconfig = "0x00000007"/>
+        <X_HW_DaylightSavingsEndDate   setconfig = "0x00000007" getconfig = "0x00000007"/>
+    </Time>
+</InternetGatewayDevice>

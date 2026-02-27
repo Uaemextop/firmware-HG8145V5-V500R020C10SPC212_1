@@ -1,0 +1,11 @@
+<InternetGatewayDevice>
+    <X_AIS_CPEagent setconfig="0x00000002">
+        <Primary_server_address setconfig="0x00000002" />
+        <Secondary_server_address setconfig="0x00000002" />
+        <CPEagent_Interval_time_first setconfig="0x00000002" />
+        <CPEagent_Interval_time_second setconfig="0x00000002" />
+        <First_server_enable setconfig="0x00000002" />
+        <Second_server_enable setconfig="0x00000002" />
+        <send_information_immediately setconfig="0x00000002" />
+    </X_AIS_CPEagent>
+</InternetGatewayDevice> 

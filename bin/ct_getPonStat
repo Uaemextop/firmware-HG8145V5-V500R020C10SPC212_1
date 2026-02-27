@@ -1,0 +1,11 @@
+#!/bin/sh
+
+ponstate=$(cwmp getstate XPON)
+if [ $ponstate = 1 ] ; then
+	echo "PON_STAT=Registered"
+elif [ $ponstate = 0 ] ; then
+	echo "PON_STAT=Unregistered"
+elif [ $ponstate = -1 ] ; then
+	echo "PON_STAT=Register_failed"
+fi
+	

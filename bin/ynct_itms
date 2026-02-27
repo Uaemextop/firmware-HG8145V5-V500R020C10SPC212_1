@@ -1,0 +1,13 @@
+#!/bin/sh
+username=$(cwmp getvalue InternetGatewayDevice.X_CT-COM_UserInfo.UserName)
+usernameoutput=${username##*UserName=}
+echo "UserName:$usernameoutput"
+userid=$(cwmp getvalue InternetGatewayDevice.X_CT-COM_UserInfo.UserId)
+useridoutput=${userid##*UserId=}
+echo "UserId:$useridoutput"
+status=$(cwmp getvalue InternetGatewayDevice.X_CT-COM_UserInfo.Status)
+statusoutput=${status##*Status=}
+echo "Status:$statusoutput"
+result=$(cwmp getvalue InternetGatewayDevice.X_CT-COM_UserInfo.Result)
+resultoutput=${result##*Result=}
+echo "Result:$resultoutput"

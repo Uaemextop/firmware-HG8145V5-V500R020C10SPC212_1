@@ -1,0 +1,16 @@
+<InternetGatewayDevice> 
+<X_HW_AwifiManage setconfig = "0x00000003">
+<RegisterServer setconfig = "0x00000003"/>
+<RegisterPort setconfig = "0x00000003"/>
+<RegisterUrl setconfig = "0x00000003"/>
+<AuthServer setconfig = "0x00000003"/>
+<AuthPort setconfig = "0x00000003"/>
+<AuthUrl setconfig = "0x00000003"/>
+<PortalServer setconfig = "0x00000003"/>
+<PortalPort setconfig = "0x00000003"/>
+<PortalUrl setconfig = "0x00000003"/>
+</X_HW_AwifiManage>
+<X_HW_DEBUG>
+<aWiFi setconfig = "0x00000003"/>
+</X_HW_DEBUG>
+</InternetGatewayDevice> 

@@ -1,0 +1,45 @@
+<InternetGatewayDevice> 
+<X_HW_Security setconfig = "0x00000007" addconfig = "0x00000007" delconfig = "0x00000007" getconfig = "0x00000007">
+<IpFilterInPolicy setconfig = "0x00000007" getconfig = "0x00000007"/>
+<IpFilterInRight setconfig = "0x00000007" getconfig = "0x00000007"/>
+<IpFilterIn setconfig = "0x00000007" addconfig = "0x00000007" delconfig = "0x00000007" getconfig = "0x00000007">
+<Enable setconfig = "0x00000007" getconfig = "0x00000007"/>
+<StartDate setconfig = "0x00000007" getconfig = "0x00000007" />
+<ExpiryDate setconfig = "0x00000007" getconfig = "0x00000007" />
+<SourceInterface setconfig = "0x00000007" getconfig = "0x00000007" />
+<SourceIPStart setconfig = "0x00000007" getconfig = "0x00000007"/>
+<SourceIPEnd setconfig = "0x00000007" getconfig = "0x00000007"/>
+<DestIPStart setconfig = "0x00000007" getconfig = "0x00000007"/>
+<DestIPEnd setconfig = "0x00000007" getconfig = "0x00000007"/>
+<Protocol setconfig = "0x00000007" getconfig = "0x00000007"/>
+<Priority setconfig = "0x00000007" getconfig = "0x00000007"/>
+<Direction setconfig = "0x00000007" getconfig = "0x00000007"/>
+<Action setconfig = "0x00000007" getconfig = "0x00000007"/>
+<Name setconfig = "0x00000007" getconfig = "0x00000007"/>
+<LanSideTcpPort setconfig = "0x00000007" getconfig = "0x00000007"/>
+<LanSideUdpPort setconfig = "0x00000007" getconfig = "0x00000007"/>
+<WanSideTcpPort setconfig = "0x00000007" getconfig = "0x00000007"/>
+<WanSideUdpPort setconfig = "0x00000007" getconfig = "0x00000007"/>
+</IpFilterIn>
+<Firewall setconfig = "0x00000007" addconfig = "0x00000007" delconfig = "0x00000007" getconfig = "0x00000007">
+<Chain setconfig = "0x00000007" addconfig = "0x00000007" delconfig = "0x00000007" getconfig = "0x00000007">
+<Enable setconfig = "0x00000007" getconfig = "0x00000007"/>
+<Name setconfig = "0x00000007" getconfig = "0x00000007"/>
+<Rule setconfig = "0x00000007" addconfig = "0x00000007" delconfig = "0x00000007" getconfig = "0x00000007">
+<SourceIP setconfig = "0x00000007" addconfig = "0x00000007" delconfig = "0x00000007" getconfig = "0x00000007"/>
+<X_HW_SourceIPRangeMax setconfig = "0x00000007" addconfig = "0x00000007" delconfig = "0x00000007" getconfig = "0x00000007"/>
+<ConnLimitNum setconfig = "0x00000007" addconfig = "0x00000007" delconfig = "0x00000007" getconfig = "0x00000007"/>
+</Rule>
+</Chain>
+</Firewall>
+<ARPFilter setconfig = "0x00000007" addconfig = "0x00000007" delconfig = "0x00000007" getconfig = "0x00000007">
+<Enable setconfig = "0x00000007" getconfig = "0x00000007"/>
+<LimitNumber setconfig = "0x00000007" getconfig = "0x00000007"/>
+<ARPAutoBindEnable setconfig = "0x00000007" getconfig = "0x00000007"/>
+<SendFreeArp setconfig = "0x00000007" addconfig = "0x00000007" delconfig = "0x00000007" getconfig = "0x00000007">
+<Interface setconfig = "0x00000007" addconfig = "0x00000007" delconfig = "0x00000007" getconfig = "0x00000007"/>
+<SendInterval setconfig = "0x00000007" addconfig = "0x00000007" delconfig = "0x00000007" getconfig = "0x00000007"/>
+</SendFreeArp>
+</ARPFilter>
+</X_HW_Security>
+</InternetGatewayDevice> 

@@ -1,0 +1,18 @@
+<InternetGatewayDevice> 
+<Services>
+<VoiceService setconfig="0x00000003">
+<VoiceProfile setconfig="0x00000003" >
+<X_HW_RingSchedule setconfig="0x00000003">
+<Enable setconfig="0x00000003" addconfig="0x00000003" delconfig="0x00000003"/>
+<Policy setconfig="0x00000003" addconfig="0x00000003" delconfig="0x00000003"/>
+<Schedules setconfig="0x00000003" addconfig="0x00000003" delconfig="0x00000003">
+<Numbers setconfig="0x00000003" addconfig="0x00000003" delconfig="0x00000003"/>
+<Days setconfig="0x00000003" addconfig="0x00000003" delconfig="0x00000003"/>
+<TimeFrom setconfig="0x00000003" addconfig="0x00000003" delconfig="0x00000003"/>
+<TimeTo setconfig="0x00000003" addconfig="0x00000003" delconfig="0x00000003"/>
+</Schedules>
+</X_HW_RingSchedule>
+</VoiceProfile>
+</VoiceService>
+</Services>
+</InternetGatewayDevice>

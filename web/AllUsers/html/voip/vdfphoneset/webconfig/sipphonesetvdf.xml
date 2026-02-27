@@ -1,0 +1,16 @@
+<InternetGatewayDevice> 
+<Services>
+<VoiceService setconfig = "0x00000003">
+<VoiceProfile setconfig = "0x00000003" >
+<Line  setconfig = "0x00000003" addconfig = "0x00000003" delconfig="0x00000003">
+<CallingFeatures  setconfig = "0x00000003" addconfig = "0x00000003" delconfig="0x00000003">
+<CallWaitingEnable setconfig = "0x00000003" addconfig = "0x00000003" delconfig="0x00000003"/>
+<X_HW_CallHoldEnable setconfig = "0x00000003" addconfig = "0x00000003" delconfig="0x00000003"/>
+<X_HW_3WayEnable setconfig = "0x00000003" addconfig = "0x00000003" delconfig="0x00000003"/>
+<CallTransferEnable setconfig = "0x00000003" addconfig = "0x00000003" delconfig="0x00000003"/>
+</CallingFeatures>
+</Line>
+</VoiceProfile>
+</VoiceService>
+</Services>
+</InternetGatewayDevice>

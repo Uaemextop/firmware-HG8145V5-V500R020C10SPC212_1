@@ -1,0 +1,107 @@
+<upgradecheck>
+<HardVerCheck  CheckEnable="1">
+<IncludeList Enable="1">
+<HardVerCheckIns BoardId="4" /> 
+<HardVerCheckIns BoardId="5" />
+<HardVerCheckIns BoardId="9" /> 
+<HardVerCheckIns BoardId="10" /> 
+<HardVerCheckIns BoardId="35" />
+<HardVerCheckIns BoardId="37" /> 
+<HardVerCheckIns BoardId="43" /> 
+<HardVerCheckIns BoardId="13431" /> 
+<HardVerCheckIns BoardId="44" /> 
+<HardVerCheckIns BoardId="12101" /> 
+<HardVerCheckIns BoardId="49" /> 
+<HardVerCheckIns BoardId="53" /> 
+<HardVerCheckIns BoardId="13031" /> 
+<HardVerCheckIns BoardId="5" /> 
+<HardVerCheckIns BoardId="51" /> 
+<HardVerCheckIns BoardId="47" />
+<HardVerCheckIns BoardId="13372" />
+<HardVerCheckIns BoardId="69" />
+<HardVerCheckIns BoardId="70" />
+<HardVerCheckIns BoardId="62" />
+<HardVerCheckIns BoardId="15048" />
+<HardVerCheckIns BoardId="102" />
+<HardVerCheckIns BoardId="63" />
+<HardVerCheckIns BoardId="64" />
+<HardVerCheckIns BoardId="65" />
+<HardVerCheckIns BoardId="13692" />
+<HardVerCheckIns BoardId="13374" />
+<HardVerCheckIns BoardId="125" />
+<HardVerCheckIns BoardId="131251" />
+<HardVerCheckIns BoardId="131255" />
+<HardVerCheckIns BoardId="126" />
+<HardVerCheckIns BoardId="131262" />
+<HardVerCheckIns BoardId="13695" />
+<HardVerCheckIns BoardId="131263" />
+</IncludeList>
+<ExcludeList Enable="0">
+<HardVerCheckIns BoardId="" PcbVersion=""/> 
+</ExcludeList>
+</HardVerCheck>
+<LswChipCheck CheckEnable="1">
+<IncludeList Enable="1">
+<LswChipCheckIns name="COMMON,NONE,HWSOC3_2,HWSOC6"/>
+</IncludeList>
+<ExcludeList Enable="0">
+</ExcludeList>
+</LswChipCheck>
+<WifiChipCheck CheckEnable="1">
+<IncludeList Enable="1">
+<WifiChipCheckIns name="COMMON,AUTOFEM,HWWIFI1_1,AUTOFEM_HWWIFI1_1,HWWIFI1_2,HWWIFI_11521"/>
+</IncludeList>
+<ExcludeList Enable="0">
+</ExcludeList>
+</WifiChipCheck>
+<VoiceChipCheck CheckEnable="1">
+<IncludeList Enable="1">
+<VoiceChipCheckIns name="COMMON,PEF31001_1_3,PEF31002_1_3"/>
+</IncludeList>
+<ExcludeList Enable="0">
+</ExcludeList>
+</VoiceChipCheck>
+<UsbChipCheck CheckEnable="1">
+<IncludeList Enable="1">
+<UsbChipCheckIns name="COMMON,NONE"/>
+</IncludeList>
+<ExcludeList Enable="0">
+</ExcludeList>
+</UsbChipCheck>
+<OpticalCheck CheckEnable="1">
+<IncludeList Enable="1">
+<OpticalCheckIns name="COMMON,NONE"/>
+</IncludeList>
+<ExcludeList Enable="0">
+<OpticalCheckIns name="COMMON"/>
+</ExcludeList>
+</OpticalCheck>
+<OtherChipCheck CheckEnable="1">
+<IncludeList Enable="1">
+<OtherChipCheckIns name="COMMON,NONE,FLASH256,S34ML02G2,W29N02GV,MX30LF2G18AC,TC58BVG1S3HTA00,PSU2GA30BT-G4IA,TC58NVG1S3HTA00,MT29F2G08ABA,PSU2GA30BTG1IA,GD9FU1G8F2AMGI,FMND2G08U3DIA"/>
+</IncludeList>
+<ExcludeList Enable="0">
+</ExcludeList>
+</OtherChipCheck>
+<ProductCheck CheckEnable="1">
+<IncludeList Enable="1">
+<ProductCheckIns name="15AD,163D,16BD,165C,166C,167C,16ED,17ED,187D,188D,191F,198F,199F,18AD,18BD,1C4D,1A1D,1D6F,1A0D,1DBD,26AD,310D"/>
+</IncludeList>
+<ExcludeList Enable="0">
+</ExcludeList>
+</ProductCheck>
+<ProgramCheck CheckEnable="1">
+<IncludeList Enable="1">
+<ProgramCheckIns name="E8C,COMMON,CHINA,CMCC,CHOOSE,DT_HUNGARY"/>
+</IncludeList>
+<ExcludeList Enable="0">
+</ExcludeList>
+</ProgramCheck>
+<CfgCheck CheckEnable="1">
+<IncludeList Enable="1">
+<CfgCheckIns name="COMMON,NONE"/>
+</IncludeList>
+<ExcludeList Enable="0">
+</ExcludeList>
+</CfgCheck>
+</upgradecheck>

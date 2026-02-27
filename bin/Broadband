@@ -1,0 +1,436 @@
+#! /bin/sh
+
+# 参数索引从0开始，$#是参数个数减1
+# 使用格式如下：
+# Broadband display XXX
+#           debug XXX on
+#                     off
+#                     pkt N
+
+isdigit()
+{
+	result=0
+	case $1 in
+	[0-9])
+		result=1
+		;;
+	[0-9][0-9])
+		result=1
+		;;
+	[0-9][0-9][0-9])
+		result=1
+		;;
+	[0-9][0-9][0-9][0-9])
+		result=1
+		;;
+	[0-9][0-9][0-9][0-9][0-9])
+		result=1
+		;;
+	esac
+	return $result
+}
+
+if [ $# -ge 2 ]; then
+	
+	# 一级命令
+	#if [ $0 == "Broadband" ]; then
+
+		# 二级命令
+		if [ $1 == "display" ]; then
+			if [ $2 == "soc" -o $2 == "ptpdrv" ]; then
+				# 不允许有参数
+				if  [ $# -ge 3 ]; then
+					if [ $2 == "soc" -a $3 == "bc" ]; then
+						if [ $# -ne 4 ]; then
+							exit 1
+						fi
+						if isdigit $4 ; then
+							exit 1
+						fi
+					elif [ $# -ne 3 ]; then
+						echo "ERROR::input para is not right!"
+						exit 1
+					fi
+				fi
+			else
+				# 不允许有参数
+				if [ $# -ne 2 ]; then
+					echo "ERROR::input para is not right!"
+					exit 1
+				fi
+			fi
+
+			case $2 in
+			soc)
+				if [ "$3" == bridge ]; then
+					Bbspcmd soc bridge
+				elif [ "$3" == ifc ]; then
+					Bbspcmd soc ifc
+				elif [ "$3" == ofc ]; then
+					Bbspcmd soc ofc
+				elif [ "$3" == sfc ]; then
+					Bbspcmd soc sfc
+				elif [ "$3" == eth ]; then
+					Bbspcmd soc eth
+				elif [ "$3" == gpon ]; then
+					Bbspcmd soc gpon
+				elif [ "$3" == l3 ]; then
+					Bbspcmd soc l3
+				elif [ "$3" == cnt ]; then
+					Bbspcmd soc cnt
+				elif [ "$3" == queue ]; then
+					Bbspcmd soc queue
+				elif [ "$3" == flow ]; then
+					Bbspcmd soc flow					
+				elif [ "$3" == bc ]; then
+					Bbspcmd soc bc $4
+				elif [ "$3" == l2 ]; then
+					Bbspcmd soc l2
+				elif [ "$3" == dscptable ]; then
+					Bbspcmd soc dscptable					
+				elif [ "$3" == macfilter ]; then
+					Bbspcmd soc macfilter
+				elif [ "$3" == car ]; then
+					Bbspcmd soc car	
+				elif [ "$3" == btv ]; then
+					Bbspcmd soc btv							
+                                elif [ "$3" == clrcnt ]; then
+                                        Bbspcmd soc clrcnt
+				else
+					echo "ERROR::input para is not right!"
+					exit 1
+				fi
+				exit 0
+				;;				
+				
+			ptpdrv)
+				if [ "$3" == dbm ] ;then 
+					Bbspcmd ptpdrv dbg dbm 
+				elif [ "$3" == rate ]; then
+					Bbspcmd ptpdrv dbg rate 
+				elif [ "$3" == stat ]; then
+					Bbspcmd ptpdrv dbg stat drop				
+				else
+					echo "ERROR::input para is not right!"
+					exit 1
+				fi
+				exit 0	
+				;;
+				
+			wlwan)
+				Bbspcmd wlwan get db
+				exit 0
+				;;
+				
+			ker_ethoam)
+				Bbspcmd ker_ethoam
+				exit 0
+				;;
+
+			ethoam)
+				Bbspcmd ethoam_pdt show cfg
+				Bbspcmd ethoam_pdt show correct
+				exit 0
+				;;
+			
+			l2mac)
+				Bbspcmd l2_pdt show l2mac
+				exit 0
+				;;
+
+			*)
+				echo "ERROR::input para is not right!"
+				exit 1
+				;;
+			esac
+		fi
+		
+		# 二级命令
+		if [ $1 == "debug" ]; then
+		  if [ $2 == "perform" ]; then
+		    
+		    path=`GetSpec SPEC_PK_FLAG_FILE_PATH`
+        #echo "Path: $path"
+        file=`echo $path | cut -d \" -f2`
+        #echo "File: $file"
+        
+		    if [ $3 == "on" ]; then	 
+		      #echo "touch $file" 
+          touch $file  
+          iptables -F -t filter
+          iptables -X -t filter
+          iptables -F -t nat
+          iptables -X -t nat
+          iptables -F -t mangle
+          iptables -X -t mangle
+          iptables -t nat -A POSTROUTING -o wan1 -j CONENAT
+          rmmod acl
+          rmmod video_diag_adpt qos_adpt
+          mw 0x14880060 0 >> $file 
+          echo "Broadband debug perform $3"   
+				  exit 0
+			  elif [ $3 == "off" ]; then
+			    #echo "rm -rf $file" 
+			    rm -rf $file 
+			    echo "Broadband debug perform $3"
+			    exit 0
+		    else
+					echo "ERROR::input para is not right!"
+					exit 1
+				fi
+			fi
+
+			if [ $2 == "pkt" ]; then
+				if [ $# -eq 2 ]; then
+					echo "ERROR::need more input para!"
+					exit 1
+				else
+					Bbspcmd pkt $*
+					exit 0
+				fi
+			fi
+
+			# 只允许有{ on | off | pkt N }三种参数
+			if [ $# -eq 3 ]; then
+				if [ $3 != "on" -a $3 != "off" ]; then
+					echo "ERROR::input para is not right!"
+					exit 1
+				fi
+			elif [ $# -eq 4 ]; then
+				isdigit $4
+				if [ $3 == "pkt" -a $? -ne 1 ]; then
+					echo "ERROR::input para is not right!"
+					exit 1
+				elif [  $2 == "ptpdrv" -a $4 != "on" -a $4 != "off"  ] ; then
+				
+					echo "ERROR::input para is not right!"
+					exit 1
+				else
+					:
+				fi
+			elif [ $# -eq 5 ]; then
+				
+				if [ $2 != "ptpdrv" ] ;then 
+					echo "ERROR::input para is not right!"
+					exit 1
+				elif [ $4 != "pkt" -o $? -ne 1 ]; then
+					isdigit $5
+					echo "ERROR::input para is not right!"
+					exit 1
+				else
+					:
+				fi
+			else	
+				echo "ERROR::input para is not right!"
+				exit 1
+			fi
+			case $2 in
+			ker_route)
+				if [ $# -eq 5 ]; then
+					echo "ERROR::input para is not right!"
+					exit 1
+				fi
+				if [ "$4" == on ]; then
+					if [ "$3" == route ]; then
+						Bbspcmd ker_route dbg route on
+					elif [ "$3" == napt ]; then
+						Bbspcmd ker_route dbg napt on
+					elif [ "$3" == session ]; then
+						Bbspcmd ker_route dbg session on
+					elif [ "$3" == all ]; then
+						Bbspcmd ker_route dbg all on
+					else
+						echo "ERROR::input para is not right!"
+						exit 1
+					fi
+				elif [ "$4" == off ]; then
+					if [ "$3" == route ]; then
+						Bbspcmd ker_route dbg route off
+					elif [ "$3" == napt ]; then
+						Bbspcmd ker_route dbg napt off
+					elif [ "$3" == session ]; then
+						Bbspcmd ker_route dbg session off
+					elif [ "$3" == all ]; then
+						Bbspcmd ker_route dbg all off
+					else
+						echo "ERROR::input para is not right!"
+						exit 1
+					fi
+				else
+					echo "ERROR::input para is not right!"
+					exit 1
+				fi
+				exit 0
+				;;
+			ptpdrv)
+				   
+					case $3 in
+					all)
+						if [ "$4" == on ]; then
+							Bbspcmd ptpdrv dbg all on
+						elif [ "$4" == off ]; then
+							Bbspcmd ptpdrv dbg all off
+						else
+							:
+						fi
+						exit 0
+						;;
+					eth)
+						if [ "$4" == on ]; then
+							Bbspcmd ptpdrv dbg  eth on
+						elif [ "$4" == off ]; then
+							Bbspcmd ptpdrv dbg  eth off
+						else 
+							Bbspcmd ptpdrv dbg eth rx $5
+							Bbspcmd ptpdrv dbg eth tx $5
+						fi
+						exit 0
+						;;
+					pon)
+						if [ "$4" == on ]; then
+							Bbspcmd ptpdrv dbg  pon on
+						elif [ "$4" == off ]; then
+							Bbspcmd ptpdrv dbg  pon off
+						else 
+							Bbspcmd ptpdrv dbg pon rx $5
+							Bbspcmd ptpdrv dbg pon tx $5
+						fi
+						exit 0
+						;;
+					wifi)
+						if [ "$4" == on ]; then
+							Bbspcmd ptpdrv dbg  wifi on
+						elif [ "$4" == off ]; then
+							Bbspcmd ptpdrv dbg  wifi off
+						else 
+							Bbspcmd ptpdrv dbg wifi rx $5
+							Bbspcmd ptpdrv dbg wifi tx $5
+						fi
+						exit 0
+						;;
+					dhcp)
+						if [ "$4" == on ]; then
+							Bbspcmd ptpdrv dbg dhcp on
+						elif [ "$4" == off ]; then
+							Bbspcmd ptpdrv dbg dhcp off
+						else 
+							Bbspcmd ptpdrv dbg dhcp on $5
+						fi
+						exit 0
+						;;
+					icmp)
+						if [ "$4" == on ]; then
+							Bbspcmd ptpdrv dbg icmp on
+						elif [ "$4" == off ]; then
+							Bbspcmd ptpdrv dbg icmp off
+						else 
+							Bbspcmd ptpdrv dbg icmp on $5
+						fi
+						exit 0
+						;;
+					arp)
+						if [ "$4" == on ]; then
+							Bbspcmd ptpdrv dbg arp on
+						elif [ "$4" == off ]; then
+							Bbspcmd ptpdrv dbg arp off
+						else 
+							Bbspcmd ptpdrv dbg arp on $5
+						fi
+						exit 0
+						;;
+					igmp)
+						if [ "$4" == on ]; then
+							Bbspcmd ptpdrv dbg igmp on
+						elif [ "$4" == off ]; then
+							Bbspcmd ptpdrv dbg igmp off
+						else 
+							Bbspcmd ptpdrv dbg igmp on $5
+						fi
+						exit 0
+						;;
+					radio)
+						if [ "$4" == on ]; then
+							Bbspcmd ptpdrv dbg  radio on
+						elif [ "$4" == off ]; then
+							Bbspcmd ptpdrv dbg  radio off
+						else 
+							Bbspcmd ptpdrv dbg radio rx $5
+							Bbspcmd ptpdrv dbg radio tx $5
+						fi
+						exit 0
+						;;
+					*)
+						echo "ERROR::input para is not right!"
+						exit 1
+						;;
+					esac
+				exit 0
+				;;
+				
+			lswadp)
+				if [ "$3" == on ]; then
+					Bbspcmd lswadp dbg all
+				elif [ "$3" == off ]; then
+					Bbspcmd lswadp dbg all off
+				else 
+					Bbspcmd lswadp dbg pkt $4
+				fi
+				exit 0
+				;;
+
+			ethoam)
+				if [ "$3" == on ]; then
+					Bbspcmd ethoam_pdt dbg cfg
+					Bbspcmd ethoam_pdt dbg proc
+				elif [ "$3" == off ]; then
+					Bbspcmd ethoam_pdt dbg off
+				else
+					:
+				fi
+				exit 0
+				;;
+
+			*)
+				echo "ERROR::input para is not right!"
+				exit 1
+				;;
+			esac
+		fi
+		
+		# 二级命令
+		if [ $1 == "stat" ]; then
+		
+			# 只允许有{ display | clear  }二种参数
+			if [ $# -eq 3 ]; then
+				if [ $3 != "display" -a $3 != "clear" ]; then
+					echo "ERROR::input para is not right!"
+					exit 1
+				fi
+			else
+				echo "ERROR::input para is not right!"
+				exit 1
+			fi
+
+			case $2 in
+			l2)
+				if [ "$3" == display ]; then
+					LdspCmdA.sh soc display l2 stat
+				elif [ "$3" == clear ]; then
+					LdspCmdA.sh soc display l2 clear
+				else
+					:
+				fi
+				exit 0
+				;;
+
+			*)
+				echo "ERROR::input para is not right!"
+				exit 1
+				;;
+			esac
+		fi
+	#fi
+fi
+
+echo "ERROR::input para is not right!"
+exit 1

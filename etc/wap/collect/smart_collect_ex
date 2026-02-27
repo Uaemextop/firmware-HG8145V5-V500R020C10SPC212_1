@@ -1,0 +1,26 @@
+SHELL:cat /mnt/jffs2/app/cplugin/cpluginstate
+SHELL:ls -l /var/|grep ker
+SHELL:cat /var/kernelapp_log.0
+SHELL:cat /var/kernelapp_log.1
+SHELL:cat /var/kernelapp_log.2
+SHELL:cat /var/kernelapp_log.3
+SHELL:cat /var/kernelapp_log.4
+SHELL:cat /var/kernelapp_boot.0
+SHELL:cat /var/kernelapp_curl.log
+SHELL:cat /var/kernelapp_post.0
+SHELL:cat /var/kernelapp_event.log
+SHELL:cat /var/kernelapp_capierrlog
+SHELL:cat /var/kernelapp_lsw.0
+SHELL:cat /var/kernelapp_lsw.1
+SHELL:cat /var/kernelapp_plugmng.0
+SHELL:cat /var/kernelapp_plugmng.1
+SHELL:cat /var/kernelapp_wanip
+SHELL:cat /var/kernelapp_gpb.0
+SHELL:cat /var/kernelapp_gpb.1
+SHELL:cat /var/kernelapp_cfg.log
+WAP:ctrgcmd show type 1
+WAP:ctrgcmd show type 2
+WAP:ctrgcmd show type 3
+WAP:ctrgcmd show type 4
+WAP:ctrgcmd show type 5
+WAP:ctrgcmd show type 6

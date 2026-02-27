@@ -1,0 +1,55 @@
+#!/bin/sh
+
+wanindextem=$(cwmp getvalue InternetGatewayDevice.WANDevice.1.X_CT-COM_WANIndex)
+wanindex=${wanindextem##*X_CT-COM_WANIndex=}
+wanindex2=`echo "$wanindex" | sed 's/,/\n/g'`
+wanindex3=`echo "$wanindex2" | sed -n '/PPPoE_Routed/p'`
+if [ ! -n "$wanindex3" ] ; then
+    wanindex3=`echo "$wanindex2" | sed -n '/;Bridged;/p'`
+fi
+if [ ! -n "$wanindex3" ] ; then
+	echo "PPPOE_STAT=NON_EXISTENT"
+	echo "ERROR_CODE=ERROR_UNKNOWN"
+	exit 0
+fi
+wanpppoeidex=${wanindex3:1:1}
+wandevice=$(cwmp getvalue InternetGatewayDevice.WANDevice.1.WANConnectionDevice.${wanpppoeidex}.)
+wanenabletemp=`echo "$wandevice" | sed -n '/\.Enable=/p'`
+wanlasterr=`echo "$wandevice" | sed -n '/\.LastConnectionError=/p'`
+wanlasterrout=${wanlasterr##*LastConnectionError=}
+	wanenable=${wanenabletemp##*Enable=}
+	wanconntypetem=`echo "$wandevice" | sed -n '/\.ConnectionType=/p'`
+	wanconntype=${wanconntypetem##*ConnectionType=}
+	if [ $wanenable != 1 ] && [ "$wanconntype" != "IP_Bridged" ]; then
+		echo "PPPOE_STAT=IDEL"
+		echo "ERROR_CODE=ERROR_NOT_ENABLED_FOR_INTERNET"
+		exit 0
+	fi
+	if [ "$wanconntype" = "PPPoE_Bridged" ] ; then
+		echo "PPPOE_STAT=BRIDGE"
+		echo "ERROR_CODE=${wanlasterrout}"
+		exit 0
+	elif [ "$wanconntype" = "IP_Bridged" ] ; then
+		echo "PPPOE_STAT=NON_EXISTENT"
+		echo "ERROR_CODE=ERROR_UNKNOWN"
+		exit 0
+	fi
+	usernametem=`echo "$wandevice" | sed -n '/\.Username=/p'`
+	username=${usernametem##*Username=}
+	if [ "$username" = "" ] ; then
+		if [ "${wanlasterrout}" = "ERROR_NONE" ] ; then
+			echo "PPPOE_STAT=IDEL"
+			echo "ERROR_CODE=ERROR_IDLE_DISCONNECT"
+			exit 0
+		fi
+	fi
+	if [ "${wanlasterrout}" = "ERROR_NONE" ] ; then
+		echo "PPPOE_STAT=SUCCESS"
+	elif [ "${wanlasterrout}" = "ERROR_ISP_TIME_OUT" ] ; then
+		echo "PPPOE_STAT=NO_RESPONSE"
+	elif [ "${wanlasterrout}" = "ERROR_AUTHENTICATION_FAILURE" ] ; then
+		echo "PPPOE_STAT=AUTH_FAILED"
+	elif [ "${wanlasterrout}" = "ERROR_UNKNOWN" ] ; then
+		echo "PPPOE_STAT=OTHER"
+	fi
+echo "ERROR_CODE=${wanlasterrout}"

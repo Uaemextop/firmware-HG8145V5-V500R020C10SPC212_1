@@ -1,0 +1,3 @@
+#!/bin/sh
+
+hw_cqct_qoe cqct_host

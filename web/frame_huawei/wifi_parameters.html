@@ -1,0 +1,767 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="X-UA-Compatible" content="IE=8,9,10">
+<link rel="stylesheet"  href='../../../resource/common/<%HW_WEB_CleanCache_Resource(style.css);%>' type='text/css'>
+<link rel="stylesheet"  href='./Cuscss/<%HW_WEB_GetCusSource(frame.css);%>' type='text/css'>
+<script language="JavaScript" src="../resource/common/<%HW_WEB_CleanCache_Resource(util.js);%>"></script>
+<script language="JavaScript" src="../../../resource/common/<%HW_WEB_CleanCache_Resource(jquery.min.js);%>"></script>
+<title>Wlan information</title>
+<script language="JavaScript" type="text/javascript">
+
+var status_wlaninfo_language =
+{
+	amp_stainfo_title:		'STA Information',
+	amp_napinfo_title:		'NEIGHBOURING WIFI INFO',
+	amp_wlanstat_sno:		'S.No',
+	amp_stainfo_devicename:		'DEVICE NAME',
+	amp_stainfo_rfband:		'2.4Ghz/5Ghz',
+	amp_stainfo_rssidbm:	'RSSI(dBm)',
+	amp_stainfo_channelno:	'CHANNEL No.',
+	amp_stainfo_associatedrate:	'ASSOCIATED RATE(Mbps)',
+	amp_stainfo_associatedip:	'ASSOCIATED IP',
+	amp_wlanstat_name:		'SSID/Network',
+	amp_stainfo_rssi:		'Signal Strength (dBm)',
+	amp_napinfo_channel:	'CHANNEL'
+};
+
+function writeFile(str)
+{
+	var fso, ctf;
+	try
+	{
+		if(window.ActiveXObject) {
+			fso = new ActiveXObject("Scripting.FileSystemObject");
+			ctf = fso.CreateTextFile("c:\\test.txt", true);
+			ctf.Write (str);
+			ctf.Close();
+		}
+	}
+	catch (e) {
+	}
+}
+
+function fixIETableScroll(id_div, id_tb)
+{
+	try{
+	if(navigator.appName.indexOf("Internet Explorer") != -1)
+    {
+    	var divv = $('#' + id_div);
+    	var tbb = $('#' + id_tb);
+        
+    	if(tbb.width() > divv.width())
+        {
+        	divv.css("padding-bottom", "17px");
+        }
+    }}catch(e){}
+}
+
+function writeTabHeader(tabTitle, tabwidth, btnWidth, type, tabId)
+{
+	if (tabwidth == null)
+		tabwidth = "100%";
+
+	var html = "<table";
+
+	if (tabId != null)
+	{
+		html += " id=\"" + tabId + "\"";
+	}
+
+	html += " width=\"" + tabwidth + "\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">"
+			+ "<tr class=\"alignment_rule\">"
+			+ "<td>";
+
+	if ('cfg' == type)
+	{
+		GetLanguageInfo(LanguageArrayInfos, g_curLanguage);
+
+		html +=  '<input style="width:' + btnWidth + '"' +'class="NewDelbuttoncss" id="Newbutton" type="button" value="' + NewCurValue + '"'
+				 + 'onclick="clickAdd(\''
+				 + tabTitle + '\');">'
+				 + '<input style="margin-left:9px;width:' + btnWidth + '"' +'id="DeleteButton" class="NewDelbuttoncss" type="button" value="' + DelCurValue + '"'
+				 + 'onclick="OnDeleteButtonClick(\''
+				 + tabTitle + '\');">'
+				 + '<tr>'
+				 + '<td class="button_spread">'
+				 + "<\/td>"
+				 + "<\/tr>";
+	}
+
+	html += "<\/td>"
+			+ "<\/tr>"
+			+ "<tr>"
+			+ "<td id=\"" + tabTitle + "\">";
+
+	writeFile(html);
+	document.write(html);
+}
+
+function stIspWlan(domain, SSID_IDX)
+{
+    this.domain = domain;
+    this.SSID_IDX = SSID_IDX;
+}
+
+var IspWlanInfo = <%HW_WEB_CmdGetWlanConf(InternetGatewayDevice.LANDevice.1.X_HW_WLANForISP.{i}, SSID_IDX, stIspWlan, EXTEND);%>;
+
+function isSsidForIsp(index)
+{
+    for (var i = 0; i < (IspWlanInfo.length - 1); i++)
+    {
+        if (IspWlanInfo[i].SSID_IDX == index)
+        {
+            return 1;
+        }
+    }
+    
+    return 0;
+}
+
+function getWlanInstFromDomain(domain)
+{
+    var str = parseInt(domain.charAt(52));
+    return str;
+}
+
+function writeTabTail()
+{
+	document.write("<\/td><\/tr><\/table>");
+}
+
+function writeTabInfoHeader(tabTitle, tabWidth, btnWidth, tabId)
+{
+	writeTabHeader(tabTitle, tabWidth, btnWidth, 'info', tabId);
+}
+
+function writeTabCfgHeader(tabTitle, tabWidth, btnWidth, tabId)
+{
+	writeTabHeader(tabTitle, tabWidth, btnWidth, 'cfg', tabId);
+}
+
+function FillTableDataWithByForm(TableName, ColumnTitleDesArray, TableDataInfo)
+{
+	var LIneDate;
+	for( var Data_j = 0; Data_j < TableDataInfo.length - 1; Data_j++)
+	{
+		var LIneDate = TableDataInfo[Data_j];
+		if( Data_j%2 == 0 )
+		{
+			var LineHtml = '<TR id="' + TableName + '_record_' + Data_j + '" class="tabal_01" onclick="selectLine(this.id);">';
+		}
+		else
+		{
+			var LineHtml = '<TR id="' + TableName + '_record_' + Data_j + '" class="tabal_02" onclick="selectLine(this.id);">';
+		}
+
+		for(var Title_j = 0; Title_j < ColumnTitleDesArray.length - 1; Title_j++)
+		{
+			var TitleAttrName = ColumnTitleDesArray[Title_j].ShowAttrName;
+			var ShowFlag = ColumnTitleDesArray[Title_j].IsNotShowFlag;
+			var TdMaxNum = ColumnTitleDesArray[Title_j].MaxNum;
+			var Td_i_Class = (null == ColumnTitleDesArray[Title_j].TableClass ? "" : ColumnTitleDesArray[Title_j].TableClass);
+			var Ischangecode = (undefined != ColumnTitleDesArray[Title_j].Ischangecode && 0 == ColumnTitleDesArray[Title_j].Ischangecode ? 0 : 1);
+			if(true == ShowFlag || "summary" == ShowFlag)
+			{
+				continue;
+			}
+
+			if("DomainBox" == TitleAttrName)
+			{
+				var onclickstr = GetCheckboxFuncString(TableName);
+				LineHtml += '<TD class="' + Td_i_Class + '" ><input id = "' + TableName + '_rml'+ Data_j + '" type="checkbox" name="' + TableName + 'rml"'  + onclickstr + ' value="' + TableDataInfo[Data_j].domain + '"></TD>';
+				continue;
+			}
+
+			var TdId = ' id="' + TableName + "_" + Data_j + "_" + Title_j + '" ';
+			if("NumIndexBox" == TitleAttrName)
+			{
+				LineHtml += '<td class="' + Td_i_Class + '" ' + TdId + '>' + (Data_j+1) + '</td>';
+				continue;
+			}
+			
+			if(0 == Ischangecode)
+			{
+				var ShowAttrValue = LIneDate[TitleAttrName];
+			}
+			else
+			{
+				var ShowAttrValue = htmlencode(LIneDate[TitleAttrName]);
+			}
+			
+			
+			if (ShowAttrValue != null)
+			{
+				var InnerHtml = (TdMaxNum == "undefined" || TdMaxNum == "") ? ShowAttrValue : GetStringContent(ShowAttrValue, TdMaxNum);
+				if (ShowAttrValue === InnerHtml)
+				{
+					LineHtml += '<TD class="' + Td_i_Class + '" ' + TdId +'>' + InnerHtml + '</TD>';
+				}
+				else
+				{
+					LineHtml += '<TD class="' + Td_i_Class + '" title="' + ShowAttrValue + '"' + TdId +'>' + InnerHtml + '</TD>';
+				}
+			}
+		}
+		LineHtml+='</tr>';
+		document.write(LineHtml);
+	}
+}
+
+function HWShowTableListByType(ShowDefault, TableName, TableType, ColumnNum, TableDataInfo, ColumnTitleDesArray,LaguageList, Callbackfunc)
+{
+	if(0 == ShowDefault)
+	{
+		return;
+	}
+
+	var WriteHeaderFunc = TableType == true ? writeTabCfgHeader : writeTabInfoHeader;
+	WriteHeaderFunc(TableName + "_head", '100%', null, TableName + "_tbl");
+	var LineRowDataNum = TableDataInfo.length - 1;
+	var tablehtml = '<table width="100%" class="tabal_bg" id="' + TableName + '" cellspacing="1">';
+	for(var Column_i = 0; Column_i < ColumnNum;  Column_i++)
+	{
+		if(0 == Column_i)
+		{
+			if('summary' == ColumnTitleDesArray[Column_i].IsNotShowFlag)
+			{
+				var summaryid = TableName + "summary";
+				var DataColumNum = ColumnNum - 1;
+				var summaryinfo_Des_Id = ColumnTitleDesArray[Column_i].DesRef;
+				var summaryinfo = (null == LaguageList[summaryinfo_Des_Id] || undefined == LaguageList[summaryinfo_Des_Id]) ? "" : LaguageList[summaryinfo_Des_Id];
+				tablehtml += '<tr class="head_summary"><td colspan=' + DataColumNum + ' id="' + summaryid + '">' + summaryinfo + '</td></tr>';
+				tablehtml += '<tr class="head_title">';
+				continue;
+			}
+			else
+			{
+				var DataColumNum = ColumnNum;
+				tablehtml += '<tr class="head_title">';
+			}
+		}
+
+		if(true == ColumnTitleDesArray[Column_i].IsNotShowFlag)
+		{
+			continue;
+		}
+
+		var headid = ' id="head' + TableName +  "_0_" + Column_i + '" ';
+		var Column_i_Des = ColumnTitleDesArray[Column_i].DesRef;
+		var Column_i_Class = (null == ColumnTitleDesArray[Column_i].TableClass ? "" : ColumnTitleDesArray[Column_i].TableClass);
+		var Des = (null == LaguageList[Column_i_Des] || undefined == LaguageList[Column_i_Des]) ? "" : LaguageList[Column_i_Des];
+		tablehtml += '<td class="' + Column_i_Class + '"' + headid + '>' + Des + '<\/td>';
+	}
+
+	tablehtml += '</tr>';
+	document.write(tablehtml);
+
+	if (LineRowDataNum == 0)
+	{
+		var firstroe = '<tr id="' + TableName + '_record_no"' + 'class="tabal_01" >';
+		for(var Column_i = 0; Column_i < DataColumNum;  Column_i++)
+		{
+			if(true == ColumnTitleDesArray[Column_i].IsNotShowFlag)
+			{
+				continue;
+			}
+
+			var TdClass = (null == ColumnTitleDesArray[Column_i].TableClass ? "" : ColumnTitleDesArray[Column_i].TableClass);
+			var headid = ' id="' + TableName +  "_0_" + Column_i + '" ';
+			firstroe += '<td align="center" class="' + TdClass + '" ' + headid +  '>--</td>';
+		}
+		firstroe += '</tr>';
+		document.write(firstroe);
+	}
+	else
+	{
+		FillTableDataWithByForm(TableName, ColumnTitleDesArray, TableDataInfo);
+		if(Callbackfunc != null)
+		{
+			Callbackfunc(TableName, ColumnNum, TableDataInfo);
+		}
+	}
+
+	document.write('</table>');
+	writeTabTail();
+}
+
+function stTableTileInfo(DesRef, TableClass, ShowAttrName, IsNotShowFlag, MaxNum, Ischangecode)
+{
+	this.DesRef = DesRef;
+	this.TableClass = TableClass;
+	this.ShowAttrName = ShowAttrName;
+	this.IsNotShowFlag = IsNotShowFlag;
+	this.MaxNum = MaxNum;
+	this.Ischangecode = Ischangecode;
+}
+
+var IspSSIDVisibility = '<%HW_WEB_GetFeatureSupport(HW_AMP_FEATURE_ISPSSID_VISIBILITY);%>';
+
+var SsidPerBand = '<%HW_WEB_GetSPEC(AMP_SPEC_SSID_NUM_MAX_BAND.UINT32);%>';
+function stWlan(domain,enable,name,ssid,BeaconType,BasicEncrypt,BasicAuth,WPAEncrypt,WPAAuth,IEEE11iEncrypt,IEEE11iAuth,WPAand11iEncrypt,WPAand11iAuth,Channel,LowerLayers, X_HW_Standard, RegulatoryDomain, X_HW_HT20, TransmitPower, X_HW_ServiceEnable, wlHide, wmmEnable, DeviceNum)
+{
+    this.domain = domain;
+    this.enable = enable;
+    this.name = name;
+    this.ssid = ssid;
+    this.BeaconType = BeaconType;    
+    this.BasicAuth = BasicAuth;
+	this.BasicEncrypt = BasicEncrypt;    
+    this.WPAAuth = WPAAuth;
+	this.WPAEncrypt = WPAEncrypt;    
+    this.IEEE11iAuth = IEEE11iAuth;
+	this.IEEE11iEncrypt = IEEE11iEncrypt;
+	this.WPAand11iAuth = WPAand11iAuth;
+	this.WPAand11iEncrypt = WPAand11iEncrypt;
+	this.Channel = Channel;	
+	this.LowerLayers = LowerLayers;
+    this.X_HW_Standard = X_HW_Standard;
+    this.RegulatoryDomain = RegulatoryDomain;
+    this.X_HW_HT20 = X_HW_HT20;
+    this.TransmitPower = TransmitPower;
+	this.X_HW_ServiceEnable = X_HW_ServiceEnable;
+	this.wlHide = wlHide;
+	this.wmmEnable = wmmEnable;
+	this.DeviceNum = DeviceNum;
+}
+
+function stIndexMapping(index,portIndex)
+{
+    this.index = index;
+    this.portIndex = portIndex;
+}
+
+function stAssociatedDevice(domain,AssociatedDeviceMACAddress,X_HW_Uptime,X_HW_RxRate,X_HW_TxRate,X_HW_RSSI,X_HW_Noise,X_HW_SNR,X_HW_SingalQuality,X_HW_WorkingMode,X_HW_WMMStatus,X_HW_PSMode,X_HW_HighBandFlag,AssociatedDeviceIPAddress,X_HW_AssociatedDevicedescriptions)
+{
+	this.domain = domain;
+	this.AssociatedDeviceMACAddress = AssociatedDeviceMACAddress;
+    this.X_HW_Uptime = X_HW_Uptime;
+    this.X_HW_RxRate = X_HW_RxRate;
+    this.X_HW_TxRate = X_HW_TxRate;
+    this.X_HW_RSSI   = X_HW_RSSI;
+    this.X_HW_Noise  = X_HW_Noise;
+    this.X_HW_SNR    = X_HW_SNR;
+    this.X_HW_SingalQuality  = X_HW_SingalQuality;
+    this.X_HW_WorkingMode  = X_HW_WorkingMode;
+    this.X_HW_WMMStatus  = X_HW_WMMStatus;
+    this.X_HW_PSMode  = X_HW_PSMode;
+	this.X_HW_HighBandFlag = X_HW_HighBandFlag;
+	this.AssociatedDeviceIPAddress  = AssociatedDeviceIPAddress;
+	this.X_HW_AssociatedDevicedescriptions  = X_HW_AssociatedDevicedescriptions;
+    this.ssidname = 0;
+	this.AssociatedNum = 0;
+	this.rfband = 0;
+	this.Channel = 0;
+}
+
+function stNeighbourAP(domain,SSID,BSSID,NetworkType,Channel,RSSI,Noise,DtimPeriod,BeaconPeriod,Security,Standard,MaxBitRate)
+{
+	this.domain = domain;
+	this.SSID = SSID;
+    this.BSSID = BSSID;
+    this.NetworkType = NetworkType;
+    this.Channel = Channel;
+    this.RSSI = RSSI;
+    this.Noise = Noise;
+    this.DtimPeriod = DtimPeriod;
+    this.BeaconPeriod = BeaconPeriod;
+    this.Security = Security;
+    this.Standard = Standard;
+    this.MaxBitRate = MaxBitRate;
+	this.neiApNum =0;
+}
+
+var WlanInfo = new Array();
+WlanInfo = <%HW_WEB_CmdGetWlanConf(InternetGatewayDevice.LANDevice.1.WLANConfiguration.{i},Enable|Name|SSID|BeaconType|BasicEncryptionModes|BasicAuthenticationMode|WPAEncryptionModes|WPAAuthenticationMode|IEEE11iEncryptionModes|IEEE11iAuthenticationMode|X_HW_WPAand11iEncryptionModes|X_HW_WPAand11iAuthenticationMode|Channel|LowerLayers|X_HW_Standard|RegulatoryDomain|X_HW_HT20|TransmitPower|X_HW_ServiceEnable|SSIDAdvertisementEnabled|WMMEnable|X_HW_AssociateNum,stWlan,STATUS);%>;  
+
+var wlanEnbl = '<%HW_WEB_GetParaByDomainName(InternetGatewayDevice.LANDevice.1.X_HW_WlanEnable);%>';
+
+var AssociatedDevice = new stAssociatedDevice("0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0","0","0");
+
+var NeighbourAP = new stNeighbourAP("0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0");
+
+var AssociatedArr = new Array();
+AssociatedArr=<%HW_WEB_CmdGetWlanConf(InternetGatewayDevice.LANDevice.1.WLANConfiguration.{i}.AssociatedDevice.{i},AssociatedDeviceMACAddress|X_HW_Uptime|X_HW_RxRate|X_HW_TxRate|X_HW_RSSI|X_HW_Noise|X_HW_SNR|X_HW_SingalQuality|X_HW_WorkingMode|X_HW_WMMStatus|X_HW_PSMode|X_HW_HighBandFlag|AssociatedDeviceIPAddress|X_HW_AssociatedDevicedescriptions,stAssociatedDevice,STATUS);%>;
+
+var associatenum2g =0;
+var associatenum5g =0;
+for (i = 0; i < AssociatedArr.length - 1; i++)
+{
+	var ssid = getWlanInstFromDomain(AssociatedArr[i].domain);  
+	for (j = 0; j < WlanInfo.length - 1; j++)
+	{
+		var ret = WlanInfo[j].domain.indexOf("InternetGatewayDevice.LANDevice.1.WLANConfiguration."+ssid);
+		if (ret == 0)
+		{
+			var wlanInst = getWlanInstFromDomain(WlanInfo[j].domain);
+			if (1 == isSsidForIsp(wlanInst) && 1 != IspSSIDVisibility)                        
+			{
+				continue;
+			}	
+			
+			if(WlanInfo[j].Channel < 15)
+			{
+				associatenum2g++;
+			}
+			else
+			{
+				associatenum5g++;
+			}
+		}
+	}
+} 
+
+function getWlanPortNumber(name)
+{
+    var length = name.length;
+    var number;
+    var str = parseInt(name.charAt(length-1));
+    return str;
+}
+
+
+var WlanMap = new Array();
+
+for (var i = 0; i < WlanInfo.length-1; i++)
+{
+    var index = getWlanPortNumber(WlanInfo[i].name);
+	WlanMap[i] = new stIndexMapping(i, index);
+}
+
+if (WlanMap.length >= 2)
+{
+    for (var i = 0; i < WlanMap.length-1; i++)
+    {
+        for( var j =0; j < WlanMap.length-i-1; j++)
+        {
+            if (WlanMap[j+1].portIndex < WlanMap[j].portIndex)
+            {
+                var middle = WlanMap[j+1];
+                WlanMap[j+1] = WlanMap[j];
+                WlanMap[j] = middle;
+            }
+        }
+    }
+}
+
+var WlanInfo2G = new Array();
+var WlanInfo5G = new Array();
+var ssidStart2G = 0;
+var ssidEnd2G = 3;
+var ssidStart5G = 4;
+var ssidEnd5G = 7;
+for (var i = 0; i < WlanInfo.length - 1; i++ )
+{
+	var athindex = getWlanPortNumber(WlanInfo[i].name);
+    if (( athindex >= ssidStart2G )&&( athindex <= ssidEnd2G ))	
+	{
+		WlanInfo2G.push(WlanInfo[i]);
+	}
+	else if (( athindex >= ssidStart5G )&&( athindex <= ssidEnd5G )) 
+	{
+		WlanInfo5G.push(WlanInfo[i]);
+	}
+}
+
+function LoadFrame()
+{ 		
+	var all = document.getElementsByTagName("td");
+	for (var i = 0; i <all.length ; i++) 
+	{
+		var b = all[i];
+		if(b.getAttribute("BindText") == null)
+		{
+			continue;
+		}
+
+		b.innerHTML = status_wlaninfo_language[b.getAttribute("BindText")];
+	}
+	
+}
+
+
+</script>
+
+</head>
+<body class="mainbodynoauth" onLoad="LoadFrame();">
+
+<table id="phone_app_info" width="100%" border="0" cellpadding="0" cellspacing="1" class="tabal_bg" style="table-layout:fixed; word-break:break-all">
+	<script language="javascript" type="text/javascript">
+		var CfgMode ='<%HW_WEB_GetCfgMode();%>';
+		if (CfgMode.toUpperCase()=="BHARTI"){
+			var OuiID='<%HW_WEB_GetParaByDomainName(InternetGatewayDevice.DeviceInfo.ManufacturerOUI);%>';
+			var SNID='<%HW_WEB_GetParaByDomainName(InternetGatewayDevice.DeviceInfo.SerialNumber);%>';
+			var DSLID='<%HW_WEB_GetParaByDomainName(InternetGatewayDevice.WANDevice.1.WANConnectionDevice.1.WANPPPConnection.1.Username);%>';
+			var td="<td class=\"table_title\" colspan=\"3\" style=\"font-weight:bold\">";
+			var td1="DSL ID  :  "+DSLID;
+			var td2="OUI-SN  :  "+OuiID+"-"+SNID;
+			var tr1="<tr>"+td+td1+"<\/td>"+"<\/tr>";
+			var tr2="<tr>"+td+td2+"<\/td>"+"<\/tr>";
+			document.write(tr1);
+			document.write(tr2);
+		}
+	</script>
+</table>
+
+<div class="tabal_head"  style="text-align:center;width:100%;">WIFI INFORMATION</div>
+
+<table id="associate_device_info" width="100%" border="0" cellpadding="0" cellspacing="1" class="tabal_bg" style="table-layout:fixed; word-break:break-all">
+    <tr> 
+        <td  class="table_title" colspan="3" style="font-weight:bold">ASSOCIATED DEVICES INFO</td>
+    </tr>
+	<tr> 
+        <td class="table_right" style="font-weight:bold">TOTAL ASSOCIATED DEVICES</td>
+		<td class="table_right" ><script language="javascript" type="text/javascript">
+		document.write('2.4Ghz : ' + associatenum2g +" Nos.");
+			    </script> </td>
+		<td class="table_right" ><script language="javascript" type="text/javascript">
+		document.write('5Ghz : ' + associatenum5g +" Nos.");
+			    </script> </td>
+    </tr>
+</table>
+
+<div id="DivStaInfo">
+
+<div id="DivStaQueryInfo_Table_Container" style="overflow:auto;overflow-y:hidden;">
+
+<script language="javascript">
+
+	var aaa = new Array();
+	aaa = <%HW_WEB_CmdGetWlanConf(InternetGatewayDevice.LANDevice.1.WLANConfiguration.{i}.AssociatedDevice.{i},AssociatedDeviceMACAddress|X_HW_Uptime|X_HW_RxRate|X_HW_TxRate|X_HW_RSSI|X_HW_Noise|X_HW_SNR|X_HW_SingalQuality|X_HW_WorkingMode|X_HW_WMMStatus|X_HW_PSMode|X_HW_HighBandFlag|AssociatedDeviceIPAddress|X_HW_AssociatedDevicedescriptions,stAssociatedDevice,STATUS);%>;
+  $(document).ready(function () {
+        var viewModel = {
+            $DivStaInfo: $('#DivStaInfo'),
+            $StaInfoTable: $('#wlan_stainfo_table'),
+            
+             appendStaInfo: function(record) {
+
+			 var TbHtml = '';
+
+			 var STATShowableFlag = 1;
+  			 var STAShowButtonFlag = 0;
+  			 var STAColumnNum = 7;
+			 var STAArray = new Array();
+  			 var STAConfiglistInfo = new Array(
+						new stTableTileInfo("amp_wlanstat_sno","align_center","AssociatedNum",false),
+						new stTableTileInfo("amp_stainfo_devicename","align_center","X_HW_AssociatedDevicedescriptions",false),
+			 			new stTableTileInfo("amp_stainfo_rfband","align_center","rfband",false),
+  						new stTableTileInfo("amp_stainfo_rssidbm","align_center","X_HW_RSSI",false),
+  						new stTableTileInfo("amp_stainfo_channelno","align_center","Channel",false),
+  						new stTableTileInfo("amp_stainfo_associatedrate","align_center","X_HW_TxRate",false),
+  						new stTableTileInfo("amp_stainfo_associatedip","align_center","AssociatedDeviceIPAddress",false),null);
+
+	          var ssidstart = 0;
+	          var ssidend   = 7; 
+            
+            for (i = 0; i < record.length - 1; i++)
+            {
+                var ssid = getWlanInstFromDomain(record[i].domain);  
+				
+				record[i].AssociatedNum = i+1;
+
+                for (j = 0; j < WlanInfo.length - 1; j++)
+                {
+                    var ret = WlanInfo[j].domain.indexOf("InternetGatewayDevice.LANDevice.1.WLANConfiguration."+ssid);
+                    if (ret == 0)
+                    {
+                        var wlanInst = getWlanInstFromDomain(WlanInfo[j].domain);
+                        if (1 == isSsidForIsp(wlanInst) && 1 != IspSSIDVisibility)                        
+                        {
+                            continue;
+                        }	
+
+                        var athindex = getWlanPortNumber(WlanInfo[j].name);
+                        if (( athindex >= ssidstart )&&( athindex <= ssidend ))
+                        {
+							record[i].Channel = WlanInfo[j].Channel;
+							
+							if(record[i].Channel < 15)
+							{
+								record[i].rfband = "2.4Ghz";
+							}
+							else
+							{
+								record[i].rfband = "5Ghz";
+							}
+							
+							viewModel.convertStaDataToHtml(record[i]);
+				   			STAArray.push(record[i]);
+                        }
+                    }
+                }
+            } 
+
+
+			if(STAArray.length != 0)
+            	STAArray.push(null);
+			
+            var _write = document.write;
+			document.write = function( str )
+			{
+			    TbHtml += str;
+			}
+
+			HWShowTableListByType(STATShowableFlag, "wlan_stainfo_table", STAShowButtonFlag, STAColumnNum, STAArray, STAConfiglistInfo, status_wlaninfo_language, null);
+			$('#DivStaQueryInfo_Table_Container').html(TbHtml);
+			document.write = _write;
+
+			fixIETableScroll("DivStaQueryInfo_Table_Container", "wlan_stainfo_table");
+			
+			},
+            processEmptyValue: function(record) {
+          	if(!record || typeof record != 'object') return ;
+          	
+          	for(var pKey in record) {
+          		record[pKey] = record[pKey] || '--';
+          		}
+          		
+          	return record;
+          },
+            convertStaDataToHtml: function(record) {
+            	
+       			record = viewModel.processEmptyValue(record);
+          		if(!record) return "";
+				
+				record.AssociatedNum = record.AssociatedNum;
+				
+          		record.AssociatedDeviceMACAddress = record.AssociatedDeviceMACAddress.toUpperCase();
+				record.ssidname = record.ssidname;
+          	}
+        };
+		    
+				if (wlanEnbl == 0)
+		        {
+		            return;
+		        }
+
+
+           		$.ajax({
+					type : "post",
+					async : true,
+					url : "../html/amp/wlaninfo/getassociateddeviceinfo.asp",
+					success : function(data) {	
+					
+					AssociatedDevice = eval(data);	
+
+					viewModel.appendStaInfo(AssociatedDevice);	
+					}		
+				});
+
+		viewModel.appendStaInfo(new Array());
+    }); 
+
+</script>
+
+</div>
+
+</div>
+
+<div id="DivNAPInfo">
+
+<table id="neighbor_info" width="100%" border="0" cellpadding="0" cellspacing="1" class="tabal_bg" style="table-layout:fixed; word-break:break-all">
+    <tr> 
+        <td  class="table_title" colspan="3" style="font-weight:bold">NEIGHBOURING WIFI INFO</td>
+    </tr>
+</table>
+
+<div id="DivNAPQueryInfo_Table_Container" style="overflow:auto;overflow-y:hidden;">
+
+<script type="text/javascript">
+	    $(document).ready(function () {
+        var ap_viewModel = {      
+            $DivNAPInfo: $('#DivNAPInfo'),
+            $btn_nap_query: $('#btn_nap_query'),
+            $ApInfoTable: $('#wlan_napinfo_table'),
+
+            appendApInfo: function(info) {
+
+			 var TbHtml = '';
+			 
+			 var APShowableFlag = 1;
+  			 var APShowButtonFlag = 0;
+  			 var APColumnNum = 4;
+			 var APArray = new Array();
+  			 var APConfiglistInfo = new Array(
+						new stTableTileInfo("amp_wlanstat_sno","align_center","neiApNum",false),
+			 			new stTableTileInfo("amp_wlanstat_name","align_center","SSID",false),
+						new stTableTileInfo("amp_stainfo_rssidbm","align_center","RSSI",false),
+  						new stTableTileInfo("amp_napinfo_channel","align_center","Channel",false),null);
+                          
+            	if(info instanceof Array) {
+            		$.each(info, function(index, item) {
+            			item = ap_viewModel.processEmptyValue(item);
+            			if(!item) return false;
+						
+						item.neiApNum = index + 1;
+            			ap_viewModel.convertApDataToHtml(item);
+						APArray.push(item);
+            		});
+					
+					
+					if(APArray.length != 0)
+						APArray.push(null);
+
+					var _write = document.write;
+					document.write = function( str ){TbHtml += str;}
+
+					HWShowTableListByType(APShowableFlag, "wlan_napinfo_table", APShowButtonFlag, APColumnNum, APArray, APConfiglistInfo, status_wlaninfo_language, null);
+					$('#DivNAPQueryInfo_Table_Container').html(TbHtml);
+					
+					document.write = _write;
+
+					fixIETableScroll("DivNAPQueryInfo_Table_Container", "wlan_napinfo_table");
+            	}
+            },
+          processEmptyValue: function(record) {
+          	if(!record || typeof record != 'object') return;
+          	
+          	for(var pKey in record) {
+          		record[pKey] = record[pKey] || '--';
+          		}
+          		
+          	return record;
+          },
+			convertApDataToHtml: function(record) {
+				
+				if(!record) return "";
+
+				record.SSID = record.SSID;
+          	}
+        };
+        
+				if (wlanEnbl == 0)
+        		{
+            		return;
+        		}
+              
+				$.ajax({
+					type : "post",
+					async : true,
+					url : "../html/amp/wlaninfo/getneighbourAPinfo.asp",
+					success : function(data) {	
+					
+					NeighbourAP = eval(data);	
+					
+					ap_viewModel.appendApInfo(NeighbourAP);		
+
+					}
+				});
+
+		ap_viewModel.appendApInfo(new Array());
+    });
+
+</script> 
+
+</div>
+
+</div>
+<div class="button_spread"></div>
+<div class="button_spread"></div>
+<div class="button_spread"></div>
+<div class="button_spread"></div>
+<div class="func_spread"></div>
+
+</body>
+</html>

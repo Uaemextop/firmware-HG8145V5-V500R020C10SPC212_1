@@ -1,0 +1,11 @@
+*.tmp
+*.log
+*.pid
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+__pycache__/
+*.pyc
+*.pyo

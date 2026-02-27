@@ -1,0 +1,10 @@
+<InternetGatewayDevice>
+    <LANDevice setconfig = "0x00000003">
+        <WLANConfiguration addconfig = "0x00000003" delconfig = "0x00000003" setconfig = "0x00000003">
+            <PreSharedKey setconfig = "0x00000003">
+                <PreSharedKey setconfig = "0x00000003"/>
+                <KeyPassphrase setconfig = "0x00000003"/>
+            </PreSharedKey>
+        </WLANConfiguration>
+    </LANDevice>
+</InternetGatewayDevice> 

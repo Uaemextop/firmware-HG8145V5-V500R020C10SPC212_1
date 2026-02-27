@@ -1,0 +1,23 @@
+SHELL:chipdebug print on
+SHELL:chipdebug phy display debug info
+SHELL:sleep 1.5
+SHELL:chipdebug phy display extphy info
+SHELL:sleep 1.5
+SHELL:sndhlp 180 0x20007003 3 0 0
+WAP:display optic
+SHELL:chipdebug ppm stat display
+SHELL:sleep 0.05
+SHELL:chipdebug ploam show log
+SHELL:sleep 1
+SHELL:chipdebug mpcp show log
+SHELL:sleep 1
+SHELL:chipdebug codec display global info 0
+SHELL:sleep 0.05
+SHELL:chipdebug codec display global info 1
+SHELL:sleep 0.05
+SHELL:chipdebug print off
+SHELL:cat /var/ppm_message
+SHELL:cat /mnt/jffs2/chip_threshold
+SHELL:cat /proc/wap_proc/flash_log
+WAP:display chipinfo
+WAP:display boot info

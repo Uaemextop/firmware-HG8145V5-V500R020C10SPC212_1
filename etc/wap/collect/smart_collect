@@ -1,0 +1,22 @@
+WAP:appmcmd show type 1
+WAP:appmcmd show type 2
+WAP:appmcmd show type 3
+WAP:osgicmd show bundlestate
+WAP:plugcmd show state
+SHELL:sudo cat /var/osgi/felixrecord0.log
+SHELL:sudo cat /var/osgi/OSGi1.log
+SHELL:sudo cat /var/osgi/OSGi0.log
+SHELL:sudo cat /mnt/jffs2/app/osgi/java_error.log
+SHELL:sudo cat /mnt/jffs2/app/osgi/java_error_bk.log
+SHELL:sudo cat /var/osgi/java_log_0.log
+SHELL:sudo cat /var/osgi/java_log_1.log
+SHELL:sudo cat /var/felix-temp/status.config
+SHELL:sudo cat /var/osgi/bundlestate 
+WAP:osgicmd show bundleresource
+WAP:jvmcmd stack trace
+SHELL: sleep 5
+SHELL:sudo cat /opt/upt/apps/apps/opt/apps/ctsgw.log
+SHELL:sudo cat /opt/upt/apps/apps/opt/apps/ctsgw.log.old
+SHELL:sudo cat /mnt/jffs2/app/cplugin/cplugin1/MyPlugin/BuildInfo
+SHELL:sudo cat /mnt/jffs2/app/cplugin/cpluginstate
+SHELL:sudo smartcmdlogread.sh

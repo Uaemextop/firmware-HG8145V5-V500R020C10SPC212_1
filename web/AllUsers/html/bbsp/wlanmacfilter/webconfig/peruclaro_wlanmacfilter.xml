@@ -1,0 +1,12 @@
+<InternetGatewayDevice>
+    <X_HW_Security setconfig = "0x00000006" addconfig = "0x00000006" delconfig = "0x00000006" getconfig = "0x00000006">
+        <WlanMacFilterPolicy setconfig = "0x00000006" getconfig = "0x00000006"/>
+        <WlanMacFilterRight setconfig = "0x00000006" getconfig = "0x00000006"/>
+        <WLANMacFilter setconfig = "0x00000006" addconfig = "0x00000006" delconfig = "0x00000006" getconfig = "0x00000006">
+            <Enable setconfig = "0x00000006" getconfig = "0x00000006"/>
+            <SSIDName setconfig = "0x00000006" getconfig = "0x00000006"/>
+            <SourceMACAddress setconfig = "0x00000006" getconfig = "0x00000006"/>
+            <DeviceName setconfig = "0x00000006" getconfig = "0x00000006"/>
+        </WLANMacFilter>
+    </X_HW_Security>
+</InternetGatewayDevice>

@@ -1,0 +1,18 @@
+#! /bin/sh
+
+varpon=$(ampqoe flowstat pon)
+echo "PON=$varpon" | sed 's/[ ][ ]/\//'
+lannumline=$(cwmp getvalue InternetGatewayDevice.LANDevice.1.LANEthernetInterfaceNumberOfEntries)
+lannum=${lannumline##*LANEthernetInterfaceNumberOfEntries=}
+for i in $(seq 1 $lannum)
+do
+	lanportline=$(shellconfig InternetGatewayDevice.X_HW_DEBUG.AMP.LANPort.${i}.CommonConfig get)
+	lanstatusline=`echo "$lanportline" | sed -n '/Link:/p'`
+	lanstatus=${lanstatusline##*Link:}
+	if [ $lanstatus -eq 0 ] ; then 
+		echo "LAN${i}=0/0"
+	else
+		varlan=$(ampqoe flowstat lan${i})
+		echo "LAN${i}=$varlan" | sed 's/[ ][ ]/\//'
+	fi
+done

@@ -1,0 +1,8 @@
+<InternetGatewayDevice> 
+<LANDevice setconfig = "0x00000003">
+<WLANConfiguration addconfig = "0x00000003" delconfig = "0x00000003" setconfig = "0x00000003">
+<Enable setconfig = "0x00000003"/>
+<SSID setconfig = "0x00000003"/>
+</WLANConfiguration>
+</LANDevice>
+</InternetGatewayDevice> 

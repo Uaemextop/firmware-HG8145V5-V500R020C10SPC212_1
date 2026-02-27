@@ -1,0 +1,7 @@
+#!/bin/sh
+
+status=$(cwmp getvalue InternetGatewayDevice.X_CT-COM_UserInfo.Status)
+statusoutput=${status##*Status=}
+result=$(cwmp getvalue InternetGatewayDevice.X_CT-COM_UserInfo.Result)
+resultoutput=${result##*Result=}
+	echo "ITMS_REGIST_STAT=""$statusoutput"",""$resultoutput"

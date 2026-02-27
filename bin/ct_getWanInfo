@@ -1,0 +1,70 @@
+#!/bin/sh
+
+wanmax=8
+for i in $(seq 1 $wanmax)
+do
+wandevice=$(cwmp getvalue InternetGatewayDevice.WANDevice.1.WANConnectionDevice.${i}.)
+wanenabletemp=`echo "$wandevice" | sed -n '/\.Enable=/p'`
+wanenable=${wanenabletemp##*Enable=}
+if [ ! -n "$wanenable" ] || [ $wanenable != 1 ] ; then
+	continue
+fi
+wantype=`echo "$wandevice" | sed -n '/X_CT-COM_ServiceList=/p'`
+wanlink=`echo "$wandevice" | sed -n '/ConnectionType=/p'`
+wanipv4=`echo "$wandevice" | sed -n '/ConnectionStatus=/p'`
+wanipv4status=${wanipv4##*ConnectionStatus=}
+wanipv6=`echo "$wandevice" | sed -n '/X_CT-COM_IPv6ConnStatus=/p'`
+wanipv6status=${wanipv6##*X_CT-COM_IPv6ConnStatus=}
+if [ "$wanipv4status" != "Unconfigured" ] && [ "$wanipv6status" != "Unconfigured" ] ; then
+	wanipv4ad=`echo "$wandevice" | sed -n '/ExternalIPAddress=/p'`
+	wanpppnum=`echo "$wandevice" | sed -n '/WANPPPConnectionNumberOfEntries=/p'`
+	if [ "${wanpppnum##*WANPPPConnectionNumberOfEntries=}" = "1" ] ; then
+		wanipv6info=$(cwmp getvalue InternetGatewayDevice.WANDevice.1.WANConnectionDevice.${i}.WANPPPConnection.1.X_HW_IPv6.)
+	else
+		wanipv6info=$(cwmp getvalue InternetGatewayDevice.WANDevice.1.WANConnectionDevice.${i}.WANIPConnection.1.X_HW_IPv6.)
+	fi
+	wanipv6ad=`echo "$wanipv6info" | sed -n '/IPAddress=/p'`
+	wanipv6len=`echo "$wanipv6info" | sed -n '/AddrMaskLen=/p'`
+	if [ "${wanipv6ad##*IPAddress=}" = "" ] && [ "${wanipv4ad##*ExternalIPAddress=}" = "0.0.0.0" ] ; then
+		wanipout="UNKNOWN;UNKNOWN"
+	elif [ "${wanipv6ad##*IPAddress=}" = "" ] && [ "${wanipv4ad##*ExternalIPAddress=}" = "" ] ; then
+		wanipout="UNKNOWN;UNKNOWN"
+	elif [ "${wanipv6ad##*IPAddress=}" = "" ] ; then
+		wanipout="${wanipv4ad##*ExternalIPAddress=}"";""UNKNOWN"
+	elif [ "${wanipv4ad##*ExternalIPAddress=}" = "0.0.0.0" ] || [ "${wanipv4ad##*ExternalIPAddress=}" = "" ] ; then
+		wanipout="UNKNOWN"";""${wanipv6ad##*IPAddress=}""/""${wanipv6len##*AddrMaskLen=}"
+	else
+		wanipout="${wanipv4ad##*ExternalIPAddress=}"";""${wanipv6ad##*IPAddress=}""/""${wanipv6len##*AddrMaskLen=}"
+	fi
+elif [ "$wanipv4status" = "Unconfigured" ] && [ "$wanipv6status" != "Unconfigured" ] ; then
+	wanpppnum=`echo "$wandevice" | sed -n '/WANPPPConnectionNumberOfEntries=/p'`
+	if [ "${wanpppnum##*WANPPPConnectionNumberOfEntries=}" = "1" ] ; then
+		wanipv6info=$(cwmp getvalue InternetGatewayDevice.WANDevice.1.WANConnectionDevice.${i}.WANPPPConnection.1.X_HW_IPv6.)
+	else
+		wanipv6info=$(cwmp getvalue InternetGatewayDevice.WANDevice.1.WANConnectionDevice.${i}.WANIPConnection.1.X_HW_IPv6.)
+	fi
+	wanipv6ad=`echo "$wanipv6info" | sed -n '/IPAddress=/p'`
+	wanipv6len=`echo "$wanipv6info" | sed -n '/AddrMaskLen=/p'`
+		if [ "${wanipv6ad##*IPAddress=}" = "" ] ; then
+			wanipout="UNKNOWN"
+		else
+			wanipout="${wanipv6ad##*IPAddress=}""/""${wanipv6len##*AddrMaskLen=}"
+		fi
+elif [ "$wanipv4status" != "Unconfigured" ] && [ "$wanipv6status" = "Unconfigured" ] ; then
+		wanipv4ad=`echo "$wandevice" | sed -n '/ExternalIPAddress=/p'`
+		if [ "${wanipv4ad##*ExternalIPAddress=}" = "0.0.0.0" ] || [ "${wanipv4ad##*ExternalIPAddress=}" = "" ] ; then
+			wanipout="UNKNOWN"
+		else
+			wanipout=${wanipv4ad##*ExternalIPAddress=}
+		fi
+fi
+echo "WAN_${i}_IP=$wanipout"
+wantypeout=${wantype##*X_CT-COM_ServiceList=}
+echo "WAN_${i}_TYPE=$wantypeout"
+wanlinkout=${wanlink##*ConnectionType=}
+if [ ${wanlinkout} = "IP_Routed" ]; then
+	echo "WAN_${i}_LINK=ROUTE"
+else
+	echo "WAN_${i}_LINK=BRIDGE"
+fi
+done	

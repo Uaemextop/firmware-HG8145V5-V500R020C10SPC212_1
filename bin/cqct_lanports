@@ -1,0 +1,10 @@
+#! /bin/sh
+
+if [ $# -ge 1 ]; then
+    echo "ERROR::input para is not right!"
+    exit
+fi
+
+lannumline=$(cwmp getvalue InternetGatewayDevice.LANDevice.1.LANEthernetInterfaceNumberOfEntries)
+lannum=${lannumline##*LANEthernetInterfaceNumberOfEntries=}
+echo "lanports=$lannum"

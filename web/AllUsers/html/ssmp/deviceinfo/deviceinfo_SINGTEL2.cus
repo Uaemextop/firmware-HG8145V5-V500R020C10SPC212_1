@@ -1,0 +1,7 @@
+var DeviceinfoReload = 
+[
+	{ReloadId:"td7_2", ReloadValue:[{DescRef:"s0206a"}]},
+	{ReloadId:"td8_2", ReloadValue:[{DescRef:"s0207a"}]},
+	{ReloadId:"td13_2", ReloadValue:[{display:0}]},
+]
+

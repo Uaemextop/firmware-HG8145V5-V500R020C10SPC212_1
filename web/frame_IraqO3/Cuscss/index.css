@@ -1,0 +1,295 @@
+﻿div#main {
+	width: 955px;
+	margin: 0px auto;
+}
+div#main div#header {
+	height: 89px;
+}
+
+div#main div#header div#headerLogoImg {
+	float: left;
+	height: 82px;
+	width: 130px;
+	background: url('../images/logo_o3_1.gif') no-repeat center;
+}
+
+div#main div#header div#headerContent {
+	float: left;
+	height: 82px;
+	width: 825px;
+	background: url('../images/banner_bg_1.gif') repeat-x center;
+}
+div#main div#header div#headerContent div#headerInfo {
+	height: 58px;
+}
+div#main div#header div#headerContent div#headerInfo div#headerTitle {
+	color: #000000;
+	text-align: left;
+	font-size: 38px;
+	line-height: 58px;
+	font-family: "Arial";
+	width: 620px;
+	float:left;
+}
+
+div#main div#header div#headerContent div#headerInfo div#headerLogout {
+	width: 90px;
+	height:58px;
+	float:left;
+}
+
+#headerLogoutImg{
+	width:30px;
+	background-image: url(../images/logout_image.gif);
+	background-repeat: no-repeat;
+	height:58px;
+	float:right;
+	vertical-align:middle;
+	cursor: pointer;
+}
+
+#headerLogoutArea{
+	text-align: right;
+	font-size: 14px;
+	width:50px;
+	height:58px;
+	float:right;
+	line-height:58px;
+	font-weight: bold;
+	color: #000000;
+}
+
+div#main div#header div#headerContent div#headerInfo div#headerRightArea {
+	height: 58px;
+	width: 100px;
+	float:right;
+}
+
+#headerRightImg {
+	height: 33px;
+	width: 63px;
+	background: url('../images/header_Image_1.gif') no-repeat center;
+	float:right;
+}
+
+#CallUs{
+	width:85px;
+	height:25px;
+	float:right;
+	color: #000000;
+	font-size: 12px;
+	line-height:25px;
+	font-weight:bold;
+}
+
+div#main div#header div#headerContent div#headerTab {
+	height:25px;
+	clear: both;
+	line-height: 25px;
+	//padding-left: 25px;
+	width:100%;
+	float:left;
+}
+
+div#main div#header div#headerContent div#headerTab div#headerTabTxt {
+	height: 25px;
+	width:109px;
+	align:right;
+}
+
+div#main div#header div#headerContent div#headerTab ul {
+	padding: 0px;
+	margin: 0px;
+	list-style-type: none;
+}
+div#main div#header div#headerContent div#headerTab ul li {
+	height: 25px;
+	float: left;
+	cursor: pointer;
+	font-weight: bold;
+	margin: 0px 3px;
+}
+div#main div#header div#headerContent div#headerTab ul li div {
+	float: left;
+}
+div#main div#header div#headerContent div#headerTab ul li div.tabBtnLeft {
+	width: 5px;
+	height: 25px;
+	clear: both;
+}
+div#main div#header div#headerContent div#headerTab ul li div.tabBtnCenter {
+	height: 25px;
+	color: #000000;
+}
+div#main div#header div#headerContent div#headerTab ul li div.tabBtnRight {
+	width: 5px;
+	height: 25px;
+}
+div#main div#header div#headerContent div#headerTab ul li.hover div.tabBtnLeft {
+	width: 10px;
+	height: 25px;
+	clear: both;
+	background-image: url(../images/menuSide_1.gif);
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+}
+div#main div#header div#headerContent div#headerTab ul li.hover div.tabBtnCenter {
+	height: 25px;
+	color: #FFFFFF;
+	background-image: url(../images/menuBg_1.gif);
+	background-repeat: repeat-x;
+}
+div#main div#header div#headerContent div#headerTab ul li.hover div.tabBtnRight {
+	width: 10px;
+	height: 25px;
+	background-image: url(../images/menuSide_1.gif);
+	background-repeat: no-repeat;
+	background-position: -10px 0px;
+}
+div#main div#header div#headerSpace {
+	height: 7px;
+	clear: both;
+	line-height: 7px;
+	width: 955px;
+	background-color: #001A71;
+}
+div#main div#center {
+	height: 545px;
+}
+div#main div#center div#nav {
+	width: 200px;
+	height: 545px;
+	float: left;
+	background-color: #F6F6F6;
+	text-align: left;
+	font-size:12px;
+	//font-weight: bold;
+}
+div#main div#center div#nav ul {
+	padding: 0px;
+	margin: 0px;
+	list-style-type: none;
+}
+div#main div#center div#nav ul li div {
+	width: 200px;
+	height: 30px;
+	cursor: pointer;
+	line-height: 30px;
+	margin-bottom: 1px;
+	background-image: url(../images/menu_left_2.gif);
+	background-repeat: no-repeat;
+	text-indent:5px;
+}
+
+div#main div#center div#nav.others ul li div
+{
+	color:#FFFFFF;
+	background-color:#646464;
+	line-height:30px;
+	text-align:left;
+}
+div#main div#center div#nav ul li.hover div {
+	color:#2AB8EB;
+	cursor: pointer;
+}
+div#main div#center div#content {
+	float: left;
+	width: 755px;
+	height: 545px;
+	background-color: #D3D3D3;
+}
+div#main div#center div#content div#topNav {
+	height: 25px;
+	color: #000000;
+	line-height: 25px;
+	padding-left: 10px;
+	background-color: #B7B7B7;
+}
+div#main div#center div#content div#frameWarpContent {
+	height: 520px;
+}
+
+div#main div#footer {
+	clear: both;
+	color: #434343;
+	text-align: right;
+	background-color: #E2E2E2;
+}
+div#main table {
+	height: 100%;
+	margin: 0px auto;
+}
+#footLink{
+	height: 25px;
+	width: 350px;
+	float:right;
+	cursor: pointer;
+}
+
+#footLinkO3{
+	height: 25px;
+	width: 100px;
+	float:right;
+	line-height:25px;
+}
+#footLinkFaceBook{
+	background-image: url(../images/footlink_facebook.gif);
+	background-repeat: no-repeat;
+	height: 25px;
+	width: 23px;
+	float:right;	
+}
+#footLinkYouTube{
+	background-image: url(../images/footlink_YouTube.gif);
+	background-repeat: no-repeat;
+	height: 25px;
+	width: 50px;
+	float:right;
+}
+
+#footCopyRight{
+	height: 25px;
+	width: 590px;
+	float:right;
+}
+
+#footerLogo {
+	height: 25px;
+	width: 27px;
+    background: url(../images/footer_logo.gif) no-repeat center;
+	float:right;
+}
+
+#footerText {
+	height: 25px;
+	color: #000000;
+	font-size: 15px;
+	float:right;
+	line-height:25px;
+}
+
+div#main div#fresh {
+	display: none;
+}
+* {
+	font-family: Arial;
+	font-size: 12px;
+	color: #000000;
+}
+body {
+	margin: 0px;
+	padding: 0px;
+}
+input.inputText {
+	height: 21px;
+	width: 180px;
+	border: 0px;
+	font-size: 12px;
+	font-family: Tahoma;
+	background: url('../images/login_inupt.gif') transparent no-repeat center;
+}
+input.button {
+	height: 21px;
+	border: 1px solid #C8C8C8;
+	background: url('../images/button_bg.gif') transparent repeat-x center;
+}

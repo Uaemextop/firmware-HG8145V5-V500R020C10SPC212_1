@@ -1,0 +1,173 @@
+#/bin/sh
+
+# hi_smd sdk load
+# hi_smd sdk clear
+# hi_smd phy load
+# hi_smd phy clear
+
+PrintHelp()
+{
+  echo " "
+	echo "hi_smd Usage:"
+	echo "hi_smd sdk load svrip 192.168.100.102 -----> to load sdk"
+	echo "hi_smd sdk clear                      -----> to clear sdk"
+	echo "hi_smd phy load svrip 192.168.100.102 -----> to load phy patch."
+	echo "hi_smd phy clear                      -----> to clear phy patch."
+	echo "hi_smd cmd load svrip 192.168.100.102 -----> to load sdk cmd."
+	echo "hi_smd cmd clear                      -----> to clear cmd patch."
+}
+
+case $1  in
+	sdk )	
+		if [ $2 = load ]; then
+				if [ $# -ne 4 ] ; then
+					echo "para num is not right" && exit 1
+				fi
+				
+				if [ $3 = svrip ]; then
+					echo "svrip="$4
+			  else
+			  	echo "ERROR::input para3 is not right!" && exit 1
+				fi
+				
+		  	cd /mnt/jffs2/
+		  	mkdir TranStar
+		  	cd TranStar
+				
+		  	tftp -g -r hi_sysctl.ko $4
+		  	tftp -g -r hi_spi.ko $4
+		  	tftp -g -r hi_pie.ko $4
+		  	tftp -g -r delivery.ko $4
+		  	tftp -g -r hi_gpio_5115.ko $4
+		  	tftp -g -r hi_gpio.ko $4
+		  	tftp -g -r hi_i2c.ko $4
+		  	tftp -g -r hi_timer.ko $4
+		  	tftp -g -r hi_serdes.ko $4
+		  	tftp -g -r hi_hw.ko $4
+		  	tftp -g -r hi_uart.ko $4
+		  	tftp -g -r hi_bridge_5115.ko $4
+		  	tftp -g -r hi_bridge.ko $4
+		  	tftp -g -r hi_xgpon.ko $4
+		  	tftp -g -r hi_xepon.ko $4
+		  	tftp -g -r hi_gpon.ko $4
+		  	tftp -g -r hi_epon.ko $4
+		  	tftp -g -r hi_l3_5115.ko $4
+		  	tftp -g -r hi_l3.ko $4
+		  	tftp -g -r hi_oam.ko $4
+		  	tftp -g -r hi_sci.ko $4
+		  	tftp -g -r hi_mdio.ko $4
+		  	
+		  	echo "load sdk success!"
+		  	
+		elif [ $2 = clear ]; then
+				rm -fr /mnt/jffs2/TranStar
+				echo "rm sdk success!"
+		else
+			echo "ERROR::input para is not right!" && exit 1
+		fi
+		;;
+	phy )
+		if [ $2 = load ]; then
+				if [ $# -ne 4 ] ; then
+					echo "para num is not right" && exit 1
+				fi
+				
+				if [ $3 = svrip ]; then
+					echo "svrip="$4
+			  else
+			  	echo "ERROR::input para3 is not right!" && exit 1
+				fi
+				
+		  	cd /mnt/jffs2/
+		  	mkdir PhyPatch
+		  	cd PhyPatch
+				
+		  	tftp -g -r phy_patch_5115h.bin $4
+		  	tftp -g -r phy_patch_5115s.bin $4
+		  	tftp -g -r phy_patch_5115t.bin $4
+		  	tftp -g -r phy_patch_5116h_fe.bin $4
+		  	tftp -g -r phy_patch_5116h_ge.bin $4
+		  	tftp -g -r phy_patch_5116l_fe.bin $4
+		  	tftp -g -r phy_patch_5116l_ge.bin $4
+		  	tftp -g -r phy_patch_5116s.bin $4
+		  	tftp -g -r phy_patch_5116t.bin $4
+			tftp -g -r phy_patch_5118.bin $4
+		  	echo "load phy patch success!"
+		  	
+		elif [ $2 = clear ]; then
+				rm -fr /mnt/jffs2/PhyPatch
+				echo "rm phy patch success!"
+		else
+			echo "ERROR::input para is not right!" && exit 1
+		fi
+		;;
+	cmd )	
+		if [ $2 = load ]; then
+				if [ $# -ne 4 ] ; then
+					echo "para num is not right" && exit 1
+				fi	
+				if [ $3 = svrip ]; then
+					echo "svrip="$4
+			  else
+			  	echo "ERROR::input para3 is not right!" && exit 1
+				fi
+				
+			cd /var/
+			mkdir hi_cmd
+			cd hi_cmd
+						
+			tftp -g -r cmd.tar $4
+			tar zxf cmd.tar cmd/
+								
+			insmod /var/hi_cmd/cmd/lib/hi_kbasic.ko
+			insmod /var/hi_cmd/cmd/lib/hi_kipc.ko
+			insmod /var/hi_cmd/cmd/lib/hi_dma.ko
+			insmod /var/hi_cmd/cmd/lib/delivery.ko
+			insmod /var/hi_cmd/cmd/lib/hi_pts.ko
+			insmod /var/hi_cmd/cmd/lib/hi_cnt.ko 
+			insmod /var/hi_cmd/cmd/lib/hi_diag_chip.ko
+			insmod /var/hi_cmd/cmd/lib/hi_diag_chip_l3.ko
+			insmod /var/hi_cmd/cmd/lib/hi_diag_cnt.ko
+			insmod /var/hi_cmd/cmd/lib/hi_diag_cap.ko
+			insmod /var/hi_cmd/cmd/lib/hi_diag_adapt_cnt.ko
+			insmod /var/hi_cmd/cmd/lib/hi_diag_api.ko
+			insmod /var/hi_cmd/cmd/lib/hi_khalext.ko
+			insmod /var/hi_cmd/cmd/lib/hi_kchipext.ko
+						
+			cd /var/hi_cmd/cmd/bin
+			chmod +x *		  	
+			echo "load hi_cmd success!"
+		  	
+		elif [ $2 = clear ]; then
+								
+			rmmod /var/hi_cmd/cmd/lib/hi_kchipext.ko
+			rmmod /var/hi_cmd/cmd/lib/hi_khalext.ko
+			rmmod /var/hi_cmd/cmd/lib/hi_diag_api.ko
+			rmmod /var/hi_cmd/cmd/lib/hi_diag_adapt_cnt.ko
+			rmmod /var/hi_cmd/cmd/lib/hi_diag_cap.ko
+			rmmod /var/hi_cmd/cmd/lib/hi_diag_cnt.ko
+			rmmod /var/hi_cmd/cmd/lib/hi_diag_chip_l3.ko
+			rmmod /var/hi_cmd/cmd/lib/hi_diag_chip.ko
+			rmmod /var/hi_cmd/cmd/lib/hi_cnt.ko 
+			rmmod /var/hi_cmd/cmd/lib/hi_pts.ko
+			rmmod /var/hi_cmd/cmd/lib/delivery.ko
+			rmmod /var/hi_cmd/cmd/lib/hi_dma.ko
+			rmmod /var/hi_cmd/cmd/lib/hi_kipc.ko
+			rmmod /var/hi_cmd/cmd/lib/hi_kbasic.ko
+			
+			cd /var/				
+			rm -rf hi_cmd/
+						
+			echo "rm hi_cmd success!"
+		else
+			echo "ERROR::input para is not right!" && exit 1
+		fi
+		;;	
+	-h )
+	        PrintHelp && exit 0
+		;;	
+	* )
+		echo "ERROR::input para is not right!"
+		PrintHelp && exit 1
+		;;
+	esac

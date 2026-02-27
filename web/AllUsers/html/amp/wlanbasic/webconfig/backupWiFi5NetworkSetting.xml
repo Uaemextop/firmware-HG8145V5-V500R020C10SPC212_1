@@ -1,0 +1,5 @@
+<InternetGatewayDevice>
+    <X_AIS_Backup setconfig="0x00000003">
+        <Enable setconfig="0x00000003"  getconfig = "0x00000003"/>
+    </X_AIS_Backup>
+</InternetGatewayDevice> 

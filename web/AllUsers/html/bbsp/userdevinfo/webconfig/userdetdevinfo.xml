@@ -1,0 +1,8 @@
+<InternetGatewayDevice>
+<LANDevice setconfig="0x00000003" getconfig="0x00000003">
+<X_HW_UserDev setconfig = "0x00000003" addconfig = "0x00000003" delconfig = "0x00000003" getconfig = "0x00000003">
+<UserDevAlias setconfig = "0x00000003" getconfig = "0x00000003"/>  	
+<UserSpecifiedDeviceType setconfig = "0x00000003" getconfig = "0x00000003"/>
+</X_HW_UserDev>
+</LANDevice> 
+</InternetGatewayDevice> 

@@ -1,0 +1,14 @@
+<InternetGatewayDevice>
+    <X_HW_ALG setconfig = "0x00000006" addconfig = "0x00000006" delconfig = "0x00000006" getconfig = "0x00000006">
+        <TftpEnable setconfig = "0x00000006" getconfig = "0x00000006"/>
+        <H323Enable setconfig = "0x00000006" getconfig = "0x00000006"/>
+        <SipEnable setconfig = "0x00000006" getconfig = "0x00000006"/>
+        <RTSPEnable setconfig = "0x00000006" getconfig = "0x00000006"/>
+        <PptpEnable setconfig = "0x00000006" getconfig =  "0x00000006"/>
+        <L2TPForward setconfig = "0x00000006" getconfig =  "0x00000006"/>
+        <IPSecForward setconfig = "0x00000006" getconfig =  "0x00000006"/>
+        <FtpEnable setconfig = "0x00000006" getconfig =  "0x00000006"/>
+        <RTCPEnable setconfig = "0x00000006" getconfig =  "0x00000006"/>
+        <RTCPPort setconfig = "0x00000006" getconfig =  "0x00000006"/>
+    </X_HW_ALG>
+</InternetGatewayDevice>

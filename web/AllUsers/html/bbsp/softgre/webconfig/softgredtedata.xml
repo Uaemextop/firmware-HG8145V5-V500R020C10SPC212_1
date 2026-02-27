@@ -1,0 +1,25 @@
+<InternetGatewayDevice>
+<X_HW_GRETunnel setconfig = "0x00000002" addconfig = "0x00000002" delconfig = "0x00000002" getconfig = "0x00000002">
+<Enable setconfig = "0x00000002" getconfig = "0x00000002"/>
+<Name setconfig = "0x00000002" getconfig = "0x00000002"/>
+<RemoteAddress setconfig = "0x00000002" getconfig = "0x00000002"/>
+<DSCPMarkPolicy setconfig = "0x00000002" getconfig = "0x00000002"/>
+<EgressPriPolicy setconfig = "0x00000002" getconfig = "0x00000002"/>
+<EgressInterface setconfig = "0x00000002" getconfig = "0x00000002"/>
+<IngressInterface setconfig = "0x00000002" addconfig = "0x00000002" delconfig = "0x00000002" getconfig = "0x00000002">
+<InterfaceName setconfig = "0x00000002" getconfig = "0x00000002"/>
+<VLANTaggingEnable setconfig = "0x00000002" getconfig = "0x00000002"/>
+<VLANID setconfig = "0x00000002" getconfig = "0x00000002"/>
+<PriPolicy setconfig = "0x00000002" getconfig = "0x00000002"/>
+<Pri setconfig = "0x00000002" getconfig = "0x00000002"/>
+</IngressInterface>
+</X_HW_GRETunnel>
+<LANDevice setconfig = "0x00000003">
+<X_HW_WLANForISP setconfig = "0x00000003" addconfig = "0x00000003" delconfig = "0x00000003" getconfig = "0x00000003">
+<SSID_IDX setconfig = "0x00000003" getconfig = "0x00000003"/>
+<UpRateLimit setconfig = "0x00000003" getconfig = "0x00000003"/>
+<DownRateLimit setconfig = "0x00000003" getconfig = "0x00000003"/>
+<SSID setconfig = "0x00000003" getconfig = "0x00000003"/>
+</X_HW_WLANForISP>
+</LANDevice>
+</InternetGatewayDevice> 

@@ -1,0 +1,7 @@
+<InternetGatewayDevice>
+<DeviceInfo setconfig ="0x00000003"> 
+<UplinkMode setconfig = "0x00000003" getconfig = "0x00000003"/>
+<X_HW_DeviceAlias setconfig =" 0x00000003"> 
+</X_HW_DeviceAlias> 
+</DeviceInfo> 
+</InternetGatewayDevice> 

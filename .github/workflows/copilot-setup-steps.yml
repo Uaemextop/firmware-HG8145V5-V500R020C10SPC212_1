@@ -1,0 +1,49 @@
+name: "Copilot Setup Steps"
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/copilot-setup-steps.yml
+  pull_request:
+    paths:
+      - .github/workflows/copilot-setup-steps.yml
+
+jobs:
+  copilot-setup-steps:
+    runs-on: aapt
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Python dependencies
+        run: |
+          pip install pytest capstone r2pipe
+
+      - name: Install firmware analysis tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq \
+            squashfs-tools \
+            qemu-user-static \
+            qemu-system-arm \
+            binutils \
+            binutils-arm-linux-gnueabi \
+            file \
+            xxd \
+            radare2 \
+            libmbedtls-dev \
+            cmake \
+            gcc-arm-linux-gnueabi \
+            liblzma-dev \
+            unrar-free \
+            p7zip-full \
+            zip

@@ -1,0 +1,26 @@
+<InternetGatewayDevice>
+    <QueueManagement setconfig = "0x00000006" addconfig = "0x00000006" delconfig = "0x00000006" getconfig = "0x00000006">
+        <X_HW_ClassificationEnable setconfig = "0x00000006" getconfig = "0x00000006"/>
+        <X_HW_Classification setconfig = "0x00000006" addconfig = "0x00000006" delconfig = "0x00000006" getconfig = "0x00000006">
+            <ClassInterface setconfig = "0x00000006" getconfig = "0x00000006"/>
+            <DomainName setconfig = "0x00000006" getconfig = "0x00000006"/>
+            <DestIP setconfig = "0x00000006" getconfig = "0x00000006"/>
+            <DestMask setconfig = "0x00000006" getconfig = "0x00000006"/>
+            <SourceIP setconfig = "0x00000006" getconfig = "0x00000006"/>
+            <SourceMask setconfig = "0x00000006" getconfig = "0x00000006"/>
+            <Protocol setconfig = "0x00000006" getconfig = "0x00000006"/>
+            <DestPort setconfig = "0x00000006" getconfig = "0x00000006"/>
+            <DestPortRangeMax setconfig = "0x00000006" getconfig = "0x00000006"/>
+            <SourcePort setconfig = "0x00000006" getconfig = "0x00000006"/>
+            <SourcePortRangeMax setconfig = "0x00000006" getconfig = "0x00000006"/>
+            <DSCPMark setconfig = "0x00000006" getconfig = "0x00000006"/>
+            <VLANIDCheck setconfig = "0x00000006" getconfig = "0x00000006"/>
+            <TRAFFIC setconfig = "0x00000006" getconfig = "0x00000006"/>
+            <PRIMARK setconfig = "0x00000006" getconfig = "0x00000006"/>
+            <TRAFFICMARK setconfig = "0x00000006" getconfig = "0x00000006"/>
+        </X_HW_Classification>
+    </QueueManagement>
+    <X_HW_APService setconfig = "0x00000006" getconfig = "0x00000006">
+        <IPTVUpPort setconfig = "0x00000006" getconfig = "0x00000006"/>
+    </X_HW_APService>
+</InternetGatewayDevice>

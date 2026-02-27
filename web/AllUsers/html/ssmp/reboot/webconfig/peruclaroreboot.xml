@@ -1,0 +1,11 @@
+<InternetGatewayDevice>
+    <X_HW_AutoReboot setconfig = "0x00000006" getconfig = "0x00000006">
+        <Enable  setconfig = "0x00000006" getconfig = "0x00000006"/>
+        <RunningDays    setconfig = "0x00000006" getconfig = "0x00000006"/>
+        <TrafficLimit  setconfig = "0x00000006" getconfig = "0x00000006"/>
+        <TrafficKeepTime  setconfig = "0x00000006" getconfig = "0x00000006"/>
+        <RebootStartTime  setconfig = "0x00000006" getconfig = "0x00000006"/>
+        <RebootEndTime   setconfig = "0x00000006" getconfig = "0x00000006"/>
+        <DelayMode   setconfig = "0x00000006" getconfig = "0x00000006"/>
+    </X_HW_AutoReboot>
+</InternetGatewayDevice>

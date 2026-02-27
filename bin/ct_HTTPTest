@@ -1,0 +1,36 @@
+#!/bin/sh
+var_busybox_disable_output_file="/var/busybox_disableoutput"
+
+# 解析输入参数
+while [ $# -gt 0 ] ; do
+        case "$1" in
+                -C) timeout=$2; shift 2;;
+                -t) mode=$2; shift 2;;
+                -m) task=$2; shift 2;;
+                -insecure) insecure=1; shift 1;;
+                -s) service=$2; shift 2;;
+                *) url=$1; shift 1;;
+        esac
+done
+
+# url,mode,task为必选参数
+if [ -z "$url" -o -z "$mode" -o -z "$task" ]; then
+    echo "Missing parameters"
+    exit 1
+fi
+
+para="$url MODE $mode TASK $task"
+
+# timeout为可选参数
+if [ -n "$timeout" ]; then
+    para=$para" timeout $timeout"
+fi
+
+# 屏蔽 busybox打印
+touch $var_busybox_disable_output_file
+
+# 执行测速程序
+HwQoETest $para
+
+# 删除屏蔽文件
+rm -fr $var_busybox_disable_output_file

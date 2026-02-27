@@ -1,0 +1,28 @@
+<InternetGatewayDevice>
+<Services>
+<X_HW_IPTV setconfig = "0x00000002" addconfig = "0x00000002" delconfig = "0x00000002" getconfig = "0x00000002">
+<IGMPEnable setconfig = "0x00000002" getconfig = "0x00000002"/>
+<ProxyEnable setconfig = "0x00000002" getconfig = "0x00000002"/>
+<SnoopingEnable setconfig = "0x00000002" getconfig = "0x00000002"/>
+<IGMPVersion setconfig = "0x00000002" getconfig = "0x00000002"/>
+<Robustness setconfig = "0x00000002" getconfig = "0x00000002"/>
+<GenQueryInterval setconfig = "0x00000002" getconfig = "0x00000002"/>
+<GenResponseTime setconfig = "0x00000002" getconfig = "0x00000002"/>
+<SpQueryNumber setconfig = "0x00000002" getconfig = "0x00000002"/>
+<SpQueryInterval setconfig = "0x00000002" getconfig = "0x00000002"/>
+<SpResponseTime setconfig = "0x00000002" getconfig = "0x00000002"/>
+<RemarkIPPrecedence setconfig = "0x00000002" getconfig = "0x00000002"/>
+<RemarkPri setconfig = "0x00000002" getconfig = "0x00000002"/>
+<PPPoEWanSnoopingMode setconfig = "0x00000002" getconfig = "0x00000002"/>
+<BridgeWanProxyEnable setconfig = "0x00000002" getconfig = "0x00000002"/>
+<PPPoEWanProxyMode setconfig = "0x00000002" getconfig = "0x00000002"/>
+<StartUpQueryInterval setconfig = "0x00000002" getconfig = "0x00000002"/>
+<StartUpQueryCount setconfig = "0x00000002" getconfig = "0x00000002"/>
+<UnsolicitedReportInterval setconfig = "0x00000002" getconfig = "0x00000002"/>
+</X_HW_IPTV>
+<X_HW_IPTV_VIETTEL setconfig = "0x00000002" addconfig = "0x00000002" delconfig = "0x00000002" getconfig = "0x00000002">
+<MultiCastVlanAct setconfig = "0x00000002" getconfig = "0x00000002"/>
+<MultiCastVlan setconfig = "0x00000002" getconfig = "0x00000002"/>
+</X_HW_IPTV_VIETTEL>
+</Services>
+</InternetGatewayDevice> 

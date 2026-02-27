@@ -1,0 +1,48 @@
+#! /bin/sh
+
+if [ $# -ne 1 ]; then
+    echo "ERROR::input para is not right!"
+    exit
+fi
+
+lannumline=$(cwmp getvalue InternetGatewayDevice.LANDevice.1.LANEthernetInterfaceNumberOfEntries)
+lannum=${lannumline##*LANEthernetInterfaceNumberOfEntries=}
+for i in $(seq 1 $lannum)
+do
+    if [ "$1" == "lan${i}" ]; then
+        lanflag=1
+        break
+    fi
+done
+if [ -z "$lanflag" ]; then
+    echo "ERROR::input para is not right!"
+    exit
+fi
+
+varpara=$1
+lanportline=$(shellconfig InternetGatewayDevice.X_HW_DEBUG.AMP.LANPort.${varpara:3}.CommonConfig get)
+lanstatusline=`echo "$lanportline" | sed -n '/Link:/p'`
+lanstatus=${lanstatusline##*Link:}
+if [ $lanstatus -eq 0 ]; then 
+    lanspeed="NOLINK"
+else
+    speedline=`echo "$lanportline" | sed -n '/Speed:/p'`
+    speedstatus=${speedline##*Speed:}
+    if [ $speedstatus -eq 0 ]; then
+        lanspeed="10Mbps"
+    elif [ $speedstatus -eq 1 ]; then
+        lanspeed="100Mbps"
+    elif [ $speedstatus -eq 2 ]; then
+        lanspeed="1000Mbps"
+    elif [ $speedstatus -eq 3 ]; then
+        lanspeed="2500Mbps"
+    elif [ $speedstatus -eq 4 ]; then
+        lanspeed="10000Mbps"
+    elif [ $speedstatus -eq 5 ]; then
+        lanspeed="Auto"
+    elif [ $speedstatus -eq 6 ]; then
+        lanspeed="5000Mbps"
+    fi
+fi
+
+echo "$lanspeed"

@@ -1,0 +1,39 @@
+#!/bin/sh
+
+#boardinfo encrypt
+txt_boardinfo=/mnt/jffs2/hw_boardinfo
+if [ -f /var/decrypt_boardinfo ]; then
+	txt_boardinfo=/var/decrypt_boardinfo
+fi
+
+feature_cqct=`GetFeature HW_SSMP_FEATURE_MNGT_CQCT`
+feature_xzct=`GetFeature HW_SSMP_FEATURE_MNGT_XZCT`
+feature_ynct=`GetFeature HW_SSMP_FEATURE_MNGT_YNCT`
+if [ $feature_cqct -ne 1 ] && [ $feature_xzct -ne 1 ] && [ $feature_ynct -ne 1 ];then
+	exit 0
+fi
+
+macoutput=`cat $txt_boardinfo | grep obj.id\ =\ \"0x0000000a\" | awk -F "\"" '{print $4}'`
+
+ouiline=$(cwmp getvalue InternetGatewayDevice.DeviceInfo.ManufacturerOUI)
+ouioutput=${ouiline##*ManufacturerOUI=}
+
+snoutput=`cat $txt_boardinfo | grep obj.id\ =\ \"0x00000019\" | awk -F "\"" '{print $4}'`
+
+factoryoutput="huawei"
+
+modelline=$(cwmp getvalue InternetGatewayDevice.DeviceInfo.ModelName)
+modeloutput=${modelline##*ModelName=}
+
+hwversionline=$(cwmp getvalue InternetGatewayDevice.DeviceInfo.HardwareVersion)
+hwversionoutput=${hwversionline##*HardwareVersion=}
+
+swversionline=$(cwmp getvalue InternetGatewayDevice.DeviceInfo.SoftwareVersion)
+swversionoutput=${swversionline##*SoftwareVersion=}
+
+echo "mac=$macoutput"
+echo "sn=$ouioutput-$snoutput"
+echo "factory=$factoryoutput"
+echo "model=$modeloutput"
+echo "hwversion=$hwversionoutput"
+echo "swversion=$swversionoutput"

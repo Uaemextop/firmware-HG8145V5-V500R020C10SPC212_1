@@ -1,0 +1,35 @@
+#! /bin/sh
+
+if [ $# -ne 1 ]; then
+    echo "ERROR::input para is not right!"
+    exit
+fi
+
+if [ "$1" == "pon" ]; then
+    ampqoe flowstat $1
+    exit
+fi
+
+lannumline=$(cwmp getvalue InternetGatewayDevice.LANDevice.1.LANEthernetInterfaceNumberOfEntries)
+lannum=${lannumline##*LANEthernetInterfaceNumberOfEntries=}
+for i in $(seq 1 $lannum)
+do
+    if [ "$1" == "lan${i}" ]; then
+        lanflag=1
+        break
+    fi
+done
+if [ -z "$lanflag" ]; then
+    echo "ERROR::input para is not right!"
+    exit
+fi
+
+varpara=$1
+lanportline=$(shellconfig InternetGatewayDevice.X_HW_DEBUG.AMP.LANPort.${varpara:3}.CommonConfig get)
+lanstatusline=`echo "$lanportline" | sed -n '/Link:/p'`
+lanstatus=${lanstatusline##*Link:}
+if [ $lanstatus -eq 0 ]; then
+	echo "0  0"
+else
+	ampqoe flowstat $1
+fi

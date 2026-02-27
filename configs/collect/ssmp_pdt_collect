@@ -1,0 +1,15 @@
+WAP:display flashlock status
+WAP:display cwmp status
+SHELL:cat /mnt/jffs2/cwmp_rebootsave
+SHELL:cat /mnt/jffs2/reboot.log
+SHELL:sudo cat /proc/kbox/deviceinfo
+SHELL:sudo cat /proc/kbox/mem 
+SHELL:sudo cat /proc/kbox/regions/deadlock
+SHELL:sudo cat /proc/kbox/regions/oom_extend
+SHELL:Getlastinfo.sh
+SHELL:brd=/mnt/jffs2/hw_boardinfo; if [ -f /var/decrypt_boardinfo ]; then brd=/var/decrypt_boardinfo; fi; cat $brd
+SHELL:brd=/mnt/jffs2/hw_boardinfo.bak; if [ -f /var/decrypt_boardinfo.bak ]; then brd=/var/decrypt_boardinfo.bak; fi; cat $brd
+SHELL:getcustominfo.sh
+SHELL:cat /mnt/jffs2/keyreleasecount.txt
+SHELL:cat /mnt/jffs2/reboot.log
+SHELL:if [ -f /var/selftestresult ]; then hexdump /var/selftestresult; fi

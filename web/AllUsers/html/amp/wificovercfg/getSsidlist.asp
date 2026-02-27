@@ -1,0 +1,1 @@
+<%HW_WEB_CmdGetWlanConf(InternetGatewayDevice.LANDevice.1.WLANConfiguration.{i}, Name|SSID, stWlanNow);%>;

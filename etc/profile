@@ -1,0 +1,135 @@
+# /etc/profile
+# init bash prompt and enviroment.
+
+alias ll="ls -l"
+alias ..="cd .."
+
+login_user=`eval echo \`ps | grep "Get username"\` | cut -d " " -f 2`
+if [ $login_user != "root" ]; then
+	alias reboot="sudo reboot"
+fi
+
+if [ -f /usr/sbin/saf-huawei ]; then
+	alias su="/bin/busybox false"
+	alias saf-huawei="sudo saf-huawei"
+fi
+
+PATH="/bin:/bin/exbin:/usr/bin:/sbin:/usr/sbin:/usr/osgi/bin:/var/osgi_app/osgi/bin:/var/felix-temp/samba/samba_file/bin:/var/felix-temp/dlna/dlna/bin:/var/hi_cmd/cmd/bin:/opt/lantiq/sbin:/opt/lantiq/usr/sbin:/opt/lantiq/bin:/sysbin"
+export LD_LIBRARY_PATH=/lib:/lib/omci_module:/lib/oam_module:/var/hi_cmd/cmd/lib:/opt/lantiq/lib:/opt/lantiq/usr/lib
+
+export DBUS_SESSION_BUS_ADDRESS=unix:path=/var/run/dbus/system_bus_socket
+
+export LANG=zh_CN.UTF-8
+export LC_ALL=zh_CN.UTF-8
+
+ctrg_enable=`GetFeature HW_SSMP_FEATURE_CTRG`
+if [ $ctrg_enable -eq 1 ]; then
+	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/glib-2.0
+fi
+
+if [ -f /usr/osgi/java ]; then
+	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/osgi/lib:/usr/osgi/lib/aarch32:/usr/osgi/lib/aarch32/jli:/usr/osgi/lib/aarch32/server
+fi
+
+#PS1="\[\033[32m\]\h \w\[\033[m\] \\$ "
+PS1="WAP(Dopra Linux) # "
+
+#如果flash中boardinfo是加密的则解密到/var目录
+if [ ! -f /var/decrypt_boardinfo ] && [ -f /bin/decrypt_boardinfo ]; then
+	if [ -f /mnt/jffs2/hw_boardinfo ]; then
+		decrypt_boardinfo -s /mnt/jffs2/hw_boardinfo -d /var/decrypt_boardinfo
+		if [ -f /var/decrypt_boardinfo ]; then
+			chmod 660 /var/decrypt_boardinfo
+		fi
+	fi
+fi
+
+#如果boardinfo是加密的，只能操作解密后的文件
+txt_boardinfo=/mnt/jffs2/hw_boardinfo
+
+if [ -f /var/decrypt_boardinfo ]; then
+	txt_boardinfo=/var/decrypt_boardinfo
+fi
+
+aiscli_enble=`GetFeature HW_FT_AIS_APP_TELNET_ONT`
+var_xpon_mode=`cat $txt_boardinfo | grep "0x00000001" | cut -c38-38`
+if [ -e /bin/aiscli ] && [ $aiscli_enble = 1 ] && [ ${var_xpon_mode} == "1" ];then
+	PS1="root@easy98020:~# "
+	#spec_ps1=`GetSpec SSMP_SPEC_CLI_SHELL_PROMPT_STR`
+	#PS1=$spec_ps1
+fi
+
+#set core dump according to the hw_wap_debug.config file
+var_file_name=/proc/wap_proc/debug_config
+if [ -e $var_file_name ]; then
+	var_find_core_flag=HW_WAP_AUTO_CORE_DUMP
+	var_find_mount=HW_WAP_AUTO_MOUNT
+	var_core_flag=`grep $var_find_core_flag $var_file_name | sed 's/[^0]*//' | sed 's/0x//'`
+	var_core_mount=`grep $var_find_mount $var_file_name | sed 's/[^\"]*//' | sed 's/"//' | cut -f 1 -d '"'`
+	if [ "$var_core_flag" != "" ] && [ "$var_core_flag" != "FFFFFFFF" ] && [ $var_core_flag -eq 1 ]; then
+		ulimit -c unlimited
+		echo "profile open core dump, flag=$var_core_flag"
+		if [ "$var_core_mount" != "" ];then
+			mount $var_core_mount
+			if [ $? = 0 ];then
+				echo "/mnt/nfs/core-%e-%p-%t" > /proc/sys/kernel/core_pattern
+				echo "profile 'mount $var_core_mount' successful"
+			else
+				echo "/var/core-%e-%p-%t" > /proc/sys/kernel/core_pattern
+				echo "profile 'mount $var_core_mount' failed"
+				route
+				ifconfig
+			fi
+		else
+			echo "/var/core-%e-%p-%t" > /proc/sys/kernel/core_pattern
+			echo "profile 'mount $var_core_mount' failed"
+		fi
+	else
+		ulimit -c 0
+                echo "profile close core dump, flag=$var_core_flag"
+        fi
+else
+	ulimit -c 0
+        echo "profile close core dump"
+fi
+
+umask 0027
+
+LOGNAME=root
+
+HOSTNAME=`/bin/hostname`
+HISTSIZE=0
+
+TMOUT=300
+
+PAGER=more
+
+export PATH PS1 USER LOGNAME HOSTNAME HISTSIZE PAGER TMOUT
+
+ft_no_boot_wifi=`GetFeature FT_WLAN_NO_BOOT_WIFI`
+
+if [ -f /mnt/jffs2/replace_celeno_ko ]; then
+export cl2400_root=/var/cl2400_host_pkg/cl2400
+elif [ $ft_no_boot_wifi -eq 1 ]; then
+export cl2400_root=/mnt/jffs2/app/cl2400_host_pkg/cl2400
+else
+export cl2400_root=/usr/lib/cl2400_host_pkg/cl2400
+fi
+export clr_install_dir_cl2400=$cl2400_root
+export PATH=$PATH:$cl2400_root/bin:$cl2400_root/scripts
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$cl2400_root/lib
+export clr_cfg_dir_cl2400_24g=/var/cl2400_24g
+export clr_cfg_dir_cl2400=/var/cl2400
+
+#Deal serial parameter
+if [ -f /bin/stty ]; then
+    stty -ixon
+fi
+
+# Running the local scripts from the user
+for i in /etc/profile.d/*.sh ; do
+	if [ -x $i ]; then
+		. $i
+	fi
+done
+unset i

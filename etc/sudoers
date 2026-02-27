@@ -1,0 +1,63 @@
+# root and users in group wheel can run anything on any machine as any user
+root ALL = (ALL) ALL
+
+# Defaults !env_reset
+Defaults env_keep += "LD_LIBRARY_PATH"
+
+# Cmnd alias
+Cmnd_Alias SSMP_CMD = /bin/hw_restore_manufactory_exec.sh, /bin/restorehwmode.sh
+Cmnd_Alias SMART_CMD = /opt/upt/framework/saf/rootfs/sbin/logread, /usr/sbin/saf-huawei, /bin/ubus
+Cmnd_Alias REBOOT_CMD = /sbin/reboot
+Cmnd_Alias USB_MODULE = /etc/wap/usb/insmod_usb.sh, /etc/wap/usb/rmmod_usb.sh
+Cmnd_Alias SSMP_CFG_CMD = /bin/rm -fr /mnt/jffs2/UserChoiceFlag, /bin/rm -fr /mnt/jffs2/app/plugins/Installer
+Cmnd_Alias SSMP_RMEM_CMD = /usr/bin/rmem
+
+Cmnd_Alias ECHO_CACHES = /bin/echo 3 > /proc/sys/vm/drop_caches
+Cmnd_Alias ECHO_DMESG = /bin/dmesg
+Cmnd_Alias BACK_STACK_CMD = /sbin/BackStackInfo.sh
+Cmnd_Alias COLLECT_INFO_CMD = /bin/cat /proc/kbox/mem, /bin/cat /proc/slabinfo, /bin/dmesg, /bin/cat /proc/net/ip_conntrack, \
+    /bin/cat /proc/net/nf_conntrack_expect, /bin/cat /proc/net/nf_conntrack_expect_save, /bin/cat /proc/kbox/deviceinfo, \
+    /bin/cat /proc/kbox/regions/deadlock, /bin/cat /proc/kbox/regions/oom_extend, /bin/cat /proc/kbox/regions/panic, \
+    /bin/cat /proc/kbox/regions/ks_0, /bin/cat /proc/kbox/regions/ks_1, /bin/cat /proc/kbox/regions/ks_2, \
+    /bin/cat /proc/kbox/regions/ks_3, /bin/cat /proc/kbox/regions/ks_4, /bin/cat /proc/kbox/regions/ks_main, \
+    /bin/cat /var/osgi/felixrecord0.log, /bin/cat /var/osgi/OSGi1.log, /bin/cat /var/osgi/OSGi0.log, \
+    /bin/cat /mnt/jffs2/app/osgi/java_error.log, /bin/cat /mnt/jffs2/app/osgi/java_error_bk.log, /bin/cat /var/osgi/java_log_0.log, \
+    /bin/cat /mnt/jffs2/app/cplugin/cplugin1/MyPlugin/BuildInfo, /bin/cat /mnt/jffs2/app/cplugin/cpluginstate, \
+    /bin/cat /var/osgi/java_log_1.log, /bin/cat /var/felix-temp/status.config, /bin/cat /var/osgi/bundlestate, /bin/smartcmdlogread.sh
+
+Cmnd_Alias BBSP_INSMOD = /usr/bin/bbsp_insmod
+Cmnd_Alias BBSP_RMMOD = /usr/bin/bbsp_rmmod
+Cmnd_Alias BBSP_PARAMOD = /usr/bin/iptdbg_insmod, /usr/bin/algvse_modprobe, /usr/bin/algrtsp_modprobe, /usr/bin/algct_modprobe
+Cmnd_Alias BBSP_NFCT = /usr/bin/nfct
+Cmnd_Alias BBSP_DPST = /usr/bin/dpst
+Cmnd_Alias CUSTOMIZE_DEL = /bin/customize_del_file.sh
+Cmnd_Alias CREATE_FACTORY_FILE = /bin/create_factory_file.sh
+Cmnd_Alias CUSTOMIZE_KILL = /bin/customize_kill_proc.sh
+Cmnd_Alias CUSTOMIZE_CERT_PROC = /bin/customize_cert_proc.sh
+Cmnd_Alias MU_MEMCLEAN_CMD = /bin/cleanmem.sh
+
+# backtrace dia interface
+%service ALL = NOPASSWD:BACK_STACK_CMD
+%config ALL = NOPASSWD:BACK_STACK_CMD
+
+# 一键式信息收集用户
+User_Alias COLLECT_USERS = srv_clid, srv_ssmp, srv_web, srv_appm, srv_cagent, cfg_omci, cfg_oam, srv_udm
+COLLECT_USERS ALL = NOPASSWD:COLLECT_INFO_CMD
+
+# srv_ssmp user config
+srv_ssmp ALL = NOPASSWD:SSMP_CMD, NOPASSWD:USB_MODULE, NOPASSWD:SSMP_CFG_CMD
+srv_mu ALL = NOPASSWD:MU_MEMCLEAN_CMD
+
+# clid shell 可以使用部分 busybox 特权命令
+srv_clid ALL = NOPASSWD:REBOOT_CMD, NOPASSWD:COMMON_LXC, NOPASSWD:CUSTOMIZE_DEL, NOPASSWD:CUSTOMIZE_KILL, NOPASSWD:CREATE_FACTORY_FILE, NOPASSWD:CUSTOMIZE_CERT_PROC
+srv_clid ALL = NOPASSWD:SSMP_CMD, NOPASSWD:SSMP_RMEM_CMD
+srv_clid ALL = NOPASSWD:SETENV:SMART_CMD
+srv_dbus ALL = NOPASSWD:SETENV:SMART_CMD
+
+# srv_wifi
+srv_wifi ALL = NOPASSWD:ECHO_CACHES, NOPASSWD:ECHO_DMESG
+
+# bbsp
+srv_bbsp ALL = NOPASSWD:BBSP_INSMOD, NOPASSWD:BBSP_RMMOD, NOPASSWD:BBSP_PARAMOD, NOPASSWD:BBSP_NFCT, NOPASSWD:BBSP_DPST
+srv_ret ALL = NOPASSWD:BBSP_INSMOD, NOPASSWD:BBSP_RMMOD
+srv_dot1x ALL = NOPASSWD:BBSP_INSMOD

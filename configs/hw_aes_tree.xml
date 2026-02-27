@@ -1,0 +1,331 @@
+<InternetGatewayDevice>
+<X_HW_AppRemoteManage>
+    <Password/>
+	<PlatPassword/>
+    <CertPassword/>
+	<LocalUserPassword/>
+	<LocalAdminPassword/>
+</X_HW_AppRemoteManage>
+<Services>
+    <VoiceService>
+        <VoiceProfile>
+            <X_HW_Option60DefaultPwd/>
+            <SIP>
+                <InboundAuthPassword/>
+            </SIP>
+            <X_HW_H248>
+                <auth>
+                    <authInitKey/>
+                    <Rfc2833EncryptKey/>
+                </auth>
+            </X_HW_H248>
+            <Line>
+                <SIP>
+                    <AuthPassword/>
+                </SIP>
+            </Line>
+        </VoiceProfile>
+    </VoiceService>
+    <StorageService>
+        <UserAccount>
+            <Password/>
+        </UserAccount>
+    </StorageService>
+</Services>
+<WANDevice>
+    <WANConnectionDevice>
+      <WANIPConnection>
+        <X_HW_DDNSConfiguration>
+        	<DDNSPassword/>
+        </X_HW_DDNSConfiguration>
+		<X_HW_RouteProtocolAuthKey/>
+        <X_HW_DHCPOPTION125>
+            <SharedKey/>
+        </X_HW_DHCPOPTION125>
+        <X_HW_IPv6OPTION17>
+            <SharedKey/>
+        </X_HW_IPv6OPTION17>
+	  <X_HW_IPoEPassword/>		
+	  </WANIPConnection>	  
+      <WANPPPConnection>
+        <Password/>
+        <X_HW_DDNSConfiguration>
+        	<DDNSPassword/>
+        </X_HW_DDNSConfiguration>
+		<X_HW_RouteProtocolAuthKey/>
+	  </WANPPPConnection>
+    </WANConnectionDevice>
+	<WANCommonInterfaceConfig>
+		<X_HW_WLANConfiguration>
+			<Key/>
+		</X_HW_WLANConfiguration>
+ 	<X_HW_RetransConfig >
+          <Key5G />
+          <Key2G />
+      </X_HW_RetransConfig>
+		<X_HW_UpmodeConfig>
+			<Key/>
+		</X_HW_UpmodeConfig>      
+	</WANCommonInterfaceConfig>
+</WANDevice>
+<LANDevice>
+	<X_HW_WLANForISP>
+		<RadiusKey/>
+		<SecondRadiusKey/>
+	</X_HW_WLANForISP>
+	<WLANConfiguration>
+                <X_HW_RadiusKey/>
+                <KeyPassphrase/>
+				<SecondaryRadiusSecret/>
+		<WEPKey >
+			<WEPKey/>
+		</WEPKey>
+		<PreSharedKey>
+			<PreSharedKey/>
+			<KeyPassphrase/>
+		</PreSharedKey>
+		<WPS>
+			<DevicePassword/>
+		</WPS>
+	</WLANConfiguration>
+	<WiFi>
+		<Radio>
+			<X_HW_ExtWiFiCpu>
+				<LocalAddr/>
+				<RemoteAddr/>
+				<Mask/>
+			</X_HW_ExtWiFiCpu>
+		</Radio>
+	</WiFi>
+	<LANHostConfigManagement>
+		<IPInterface>
+		<X_HW_RouteProtocolAuthKey/>
+		</IPInterface>
+	</LANHostConfigManagement>
+</LANDevice>
+<X_HW_ServiceManage>
+    <FtpPassword/>
+</X_HW_ServiceManage>
+<X_HW_WAN_ServiceManage>
+    <FtpPassword/>
+</X_HW_WAN_ServiceManage>
+<X_HW_AppSrvManage>
+    <FtpPassword/>
+</X_HW_AppSrvManage>
+<ManagementServer>
+    <Password/>
+    <ConnectionRequestPassword/>
+    <STUNPassword/>
+    <X_HW_CertPassword/>
+	<SftpPassphraseKey/>
+  </ManagementServer>
+<X_HW_OmciPppoeAccount>
+    <OmciPppoeAccount>
+        <Password/>
+     </OmciPppoeAccount>
+</X_HW_OmciPppoeAccount>
+<X_HW_AmpInfo>
+	<X_HW_WpsDefaultPin>
+		<DevicePassword />
+	</X_HW_WpsDefaultPin>
+</X_HW_AmpInfo>
+<UserInterface>
+    <X_HW_WebSslInfo>
+        <CertPassword/>
+    </X_HW_WebSslInfo>
+</UserInterface>
+<X_HW_UserInfo >
+<UserName />
+<UserId/>
+<Password/>
+</X_HW_UserInfo>
+<X_HW_SSMPPDT >
+<Deviceinfo >
+<X_HW_DataCardManage >
+<X_HW_DataCard >
+<X_HW_SIMCard >
+<PinCode />
+</X_HW_SIMCard>
+</X_HW_DataCard>
+</X_HW_DataCardManage>
+</Deviceinfo>
+</X_HW_SSMPPDT>
+<X_HW_Radio_WAN>
+<Password/>
+</X_HW_Radio_WAN>
+	<X_HW_XgponDeviceInfo>
+		<RegistrationID/>
+		<PreSharedKey/>
+	</X_HW_XgponDeviceInfo>
+<X_HW_RIP>
+<InterfaceSetting>
+<AuthKey/>
+</InterfaceSetting>
+</X_HW_RIP>
+<X_HW_DataModel>
+<X_HW_GXB>
+<DeviceInfo>
+<Long/>
+<Lat/>
+<Altitudes/>
+<AreaCode/>
+<HorizontalError/>
+<AltitudeError/>
+<GISLockTime/>
+<GISDigest/>
+</DeviceInfo>
+</X_HW_GXB>
+</X_HW_DataModel>
+<X_HW_AppSrvManage>
+<FtpPassword/>
+</X_HW_AppSrvManage>
+<X_HW_DataModel>
+	<PPP>
+		<Interface>
+			<Password/>
+		</Interface>
+	</PPP>
+	<X_HW_TransferQueue>
+		<Password/>
+	</X_HW_TransferQueue>
+</X_HW_DataModel>
+<UserInterface>
+    <X_HW_CLITelnetAccess>
+        <SuperModeValue/>
+    </X_HW_CLITelnetAccess>
+    <X_HW_WebUserInfo>
+        <Password/>
+        <PasswordFW/>
+        <FactoryPassword/>
+        <X_HW_History>
+            <X_HW_Password/>
+        </X_HW_History>
+    </X_HW_WebUserInfo>
+    <X_HW_CLIUserInfo>
+        <Userpassword/>
+			<Userpasscode/>
+    </X_HW_CLIUserInfo>
+		<X_HW_AppAccessSwitchFW>
+		<Authorization/>
+		</X_HW_AppAccessSwitchFW>
+</UserInterface>
+<DeviceInfo>
+	<X_HW_MonitorCollector>
+		<Password/>
+	</X_HW_MonitorCollector>
+	<X_HW_Syslog>
+		<Password/>
+	</X_HW_Syslog>
+</DeviceInfo>
+<X_HW_PPPoE_BridgeWAN_AutoEmulator>
+    <Password/>
+</X_HW_PPPoE_BridgeWAN_AutoEmulator>
+<FON>
+    <Key/>
+</FON>
+<X_HW_HiLinkInfo>
+    <CertPwdForHiLink/>
+    <PSK>
+        <ClientIdentity/>
+        <Password/>
+        <Salt/>
+    </PSK>
+</X_HW_HiLinkInfo>
+<X_HW_Collect>
+<X_HW_CollectMonitor>
+<FTPPassword/>
+</X_HW_CollectMonitor>
+</X_HW_Collect>
+<X_HW_WifiCoverService>
+<TokenObj>
+<Token/>
+</TokenObj>
+</X_HW_WifiCoverService>
+<X_HW_APTokenService>
+<ApToken/>
+<PairToken/>
+</X_HW_APTokenService>
+<X_HW_VPN>
+	<PPTPLAC>
+		<PPPCONFIG>
+			<Password/>
+		</PPPCONFIG>
+	</PPTPLAC>
+	<VpnRelation>
+		<Password/>
+	</VpnRelation>
+	<L2TPLAC>
+		<PPPCONFIG>
+			<Password/>
+		</PPPCONFIG>
+	</L2TPLAC>
+</X_HW_VPN>
+<X_HW_L2TPTunnel>
+	<Password/>
+</X_HW_L2TPTunnel>
+<X_HW_CU_DDNS>
+	<Password/>
+</X_HW_CU_DDNS>
+<X_HW_DataModel>
+	<DynamicDNS>
+		<Client>
+			<Password/>
+		</Client>
+	</DynamicDNS>
+	<Security>
+		<Certificate>
+			<X_HW_Password/>
+		</Certificate>
+	</Security>
+</X_HW_DataModel>
+<X_HW_IEEE8021X>
+	<Radius>
+		<SharedSecretAuth1/>
+		<SharedSecretAuth2/>
+		<SharedSecretAccount1/>
+		<SharedSecretAccount2/>
+		<AuthorizationClient>
+			<SharedSecret/>
+		</AuthorizationClient>
+	</Radius>
+</X_HW_IEEE8021X>
+<BulkData>
+	<Profile>
+		<FileTransferPassword/>
+		<HTTP>
+			<Password/>
+		</HTTP>
+	</Profile>
+</BulkData>
+<DeviceConfig>
+	<X_HW_ConfigEncryptionKey/>
+</DeviceConfig>
+<X_HW_HttpSpeedTest>
+	<Eupassword/>
+</X_HW_HttpSpeedTest>
+<X_HW_RMS_SpeedTest>
+	<Eupassword/>
+</X_HW_RMS_SpeedTest>
+<X_HW_SmartServer>
+    <ReportInfo>
+        <AppData/>
+    </ReportInfo>
+</X_HW_SmartServer>
+<X_HW_SuperWiFi>
+<Password/>
+<ClientSecret/>
+</X_HW_SuperWiFi>
+<X_AIS_MeshAPI>
+    <Password />
+</X_AIS_MeshAPI>
+<X_AIS_CPEagent>
+    <SecretKey />
+</X_AIS_CPEagent>
+<X_AIS_Backhaul>
+    <Key/>
+</X_AIS_Backhaul>
+<X_AIS_Backup>
+    <Pwd2g/>
+    <Pwd5g/>
+</X_AIS_Backup>
+</InternetGatewayDevice>

@@ -1,0 +1,179 @@
+
+div#main {
+	width: 955px;
+	margin: 0px auto;
+}
+
+div#main div#header {
+	height: 76px;
+}
+
+div#main div#header div#headerContent {
+	float: left;
+	height: 70px;
+	width: 955px;
+	background-color:#ffffff;
+}
+
+div#main div#header div#headerContent div#headerInfo {
+	height: 45px;
+}
+
+div#main div#header div#headerContent div#headerInfo div#headerqtelImg {
+	height: 45px;
+	width:955px;
+	background: url('../images/banner_qtel.jpg') no-repeat center;
+}
+
+div#main div#qtelfoot {
+	clear: both;
+	height: 25px;
+	color:#ed1c24;
+	text-align: center;   
+	background-color: #ED1C24;
+	
+	
+}
+
+
+div#main div#header div#headerContent div#headerTab {
+	height: 25px;
+	clear: both;
+	line-height: 25px;
+}
+div#main div#header div#headerContent div#headerTab ul {
+	padding: 0px;
+	margin: 0px;
+	list-style-type: none;
+}
+div#main div#header div#headerContent div#headerTab ul li {
+	height: 25px;
+	float: left;
+	cursor: pointer;
+	font-weight: bold;
+	margin: 0px 3px;
+}
+div#main div#header div#headerContent div#headerTab ul li div {
+	float: left;
+}
+div#main div#header div#headerContent div#headerTab ul li div.tabBtnLeft {
+	width: 5px;
+	height: 25px;
+	clear: both;
+}
+div#main div#header div#headerContent div#headerTab ul li div.tabBtnCenter {
+	height: 25px;
+	color: #000000;
+}
+
+div#main div#header div#headerContent div#headerTab ul li div.tabBtnCenter {
+	height: 25px;
+	color: #000000;
+}
+div#main div#header div#headerContent div#headerTab ul li.hover div.tabBtnLeft {
+	width: 10px;
+	height: 25px;
+	clear: both;
+	
+
+}
+div#main div#header div#headerContent div#headerTab ul li.hover div.tabBtnCenter {
+	height: 25px;
+	color: #ed1c24;
+	
+}
+div#main div#header div#headerContent div#headerTab ul li.hover div.tabBtnRight {
+	width: 10px;
+	height: 25px;
+	
+}
+div#main div#header div#headerSpace {
+	height: 6px;
+	clear: both;
+	line-height: 6px;
+	background-color: #ed1c24;
+}
+
+div#main div#center {
+	height: 470px;
+}
+div#main div#center div#nav {
+	width: 220px;
+	height: 495px;
+	float: left;
+	background-color: #d8d8d8;
+}
+div#main div#center div#nav ul {
+	padding: 0px;
+	margin: 0px;
+	list-style-type: none;
+}
+div#main div#center div#nav ul li div {
+	width: 210px;
+	height: 25px;
+	color: #FFFFFF;
+	cursor: pointer;
+	line-height: 25px;
+	font-weight: bold;
+	margin-bottom: 1px;
+	padding-left: 10px;
+	background-color: #d8d8d8;
+}
+div#main div#center div#nav ul li.hover div {
+	color: #ffffff;
+	font-weight: bold;
+	
+	cursor: pointer;
+	background-color: #ed1c24;
+}
+div#main div#center div#content {
+	float: left;
+	width: 735px;
+	height: 495px; 
+	color: #ed1c24;
+	background-color: #d8d8d8;
+}
+div#main div#center div#content div#topNav {
+	height: 25px;
+	color: #000000;
+	line-height: 25px;
+	padding-left: 10px;
+	background-color: #d8d8d8;
+}   
+
+div#main div#center div#content span#topNavMainMenu {
+	height: 25px;
+	color: #000000;
+}    
+
+div#main div#center div#content span#topNavSubMenu {
+	height: 25px;
+	color: #000000;
+}   
+
+div#main div#center div#content div#frameWarpContent {
+	height: 470px;
+}
+
+div#main table {
+	height: 100%;
+	margin: 0px auto;
+}
+div#main div#footer #footerLogo {
+	height: 25px;
+	width: 40px;
+    background: url(../images/hw_logo.gif) no-repeat center;
+}
+div#main div#footer #footerText {
+	color: #434343;
+	font-size: 12px;
+}
+
+div#main div#fresh {
+	display: none;
+}
+
+* {
+	font-family: Arial;
+	font-size: 12px;
+}

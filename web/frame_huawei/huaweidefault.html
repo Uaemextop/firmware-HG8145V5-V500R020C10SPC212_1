@@ -1,0 +1,262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Pragma" content="no-cache" />
+<script language="JavaScript" src="../resource/<%HW_WEB_Resource(ssmpdes.js);%>"></script>
+<script language="JavaScript" src="../resource/<%HW_WEB_Resource(ampdes.html);%>"></script>
+<script language="JavaScript" src="../resource/<%HW_WEB_Resource(jsdiff.js);%>"></script>
+<link rel="stylesheet"  href='../resource/common/<%HW_WEB_CleanCache_Resource(style.css);%>' type='text/css'>
+<link rel="stylesheet"  href='../Cuscss/<%HW_WEB_GetCusSource(frame.css);%>' type='text/css'>
+<script language="JavaScript" src="../resource/common/<%HW_WEB_CleanCache_Resource(jquery.min.js);%>"></script>
+<script language="JavaScript" src="../resource/common/<%HW_WEB_CleanCache_Resource(safelogin.js);%>"></script>
+<script language="JavaScript" src="../resource/common/<%HW_WEB_CleanCache_Resource(util.js);%>"></script>
+<script language="JavaScript" type="text/javascript">
+
+var curLanguage='<%HW_WEB_GetCurrentLanguage();%>';
+
+function stDeviceInfo(domain,SerialNumber,Mac,ManufacturerOUI)
+{
+	this.domain 			= domain;
+	this.SerialNumber 		= SerialNumber;
+	this.Mac				= Mac;
+	this.ManufacturerOUI  	= ManufacturerOUI;
+}	
+
+function ONTInfo(domain,ONTID,Status)
+{
+	this.domain 		= domain;
+	this.ONTID			= ONTID;
+	this.Status			= Status;
+}
+
+
+function conv16to12Sn(SerialNum)
+{
+    var charVid = "";
+	var hexVid = "";
+	var vssd = "";
+	var i;
+
+    hexVid = SerialNum.substr(0,8);
+	vssd = SerialNum.substr(8,8);
+	
+	for(i=0; i<8; i+=2)
+	{
+		charVid += String.fromCharCode("0x"+hexVid.substr(i, 2));
+	}
+
+	return charVid+vssd;
+}
+
+function stOpticInfo(domain,transOpticPower,revOpticPower,voltage,temperature,bias)
+{
+    this.domain = domain;
+	this.transOpticPower = transOpticPower;
+	this.revOpticPower = revOpticPower;
+	this.voltage = voltage;
+	this.temperature = temperature;
+	this.bias = bias;
+}
+
+var ontInfos = <%HW_WEB_GetParaArryByDomain(InternetGatewayDevice.X_HW_DEBUG.AMP.ONT,Ontid|State,ONTInfo);%>;
+var ontEPONInfos = <%HW_WEB_GetParaArryByDomain(InternetGatewayDevice.X_HW_DEBUG.OAM.ONT,Ontid|State,ONTInfo);%>;
+var ontPonMode = '<%HW_WEB_GetParaByDomainName(InternetGatewayDevice.X_HW_DEBUG.AMP.AccessModeDisp.AccessMode);%>';
+var deviceInfos = <%HW_WEB_GetParaArryByDomain(InternetGatewayDevice.DeviceInfo, SerialNumber|X_HW_LanMac|ManufacturerOUI, stDeviceInfo);%>; 
+var ontInfo = ontInfos[0];
+var ontEPONInfo = ontEPONInfos[0];
+var deviceInfo = deviceInfos[0];
+ 
+var opticInfos = <%HW_WEB_GetParaArryByDomain(InternetGatewayDevice.X_HW_DEBUG.AMP.Optic,TxPower|RxPower|Voltage|Temperature|Bias, stOpticInfo);%>; 
+var opticInfo = opticInfos[0];
+var ProductName = '<%HW_WEB_GetParaByDomainName(InternetGatewayDevice.DeviceInfo.ModelName);%>';
+document.title = ProductName;
+var BhartiFlag = '<%HW_WEB_GetFeatureSupport(FT_HUAWEIDEFAULT_PAGE);%>';
+
+function loadlanguage() 
+{
+	var all = document.getElementsByTagName("td");
+	for (var i = 0; i <all.length ; i++) 
+	{
+		var b = all[i];
+		if(b.getAttribute("BindText") == null)
+		{
+			continue;
+		}
+		b.innerHTML = waninfo_language[b.getAttribute("BindText")];
+	}
+}
+
+
+function LoadFrame()
+{  
+	
+	if(1 == BhartiFlag)
+	{
+		document.getElementById('Bharti_table_DC').style.display = 'table-row';
+		document.getElementById('Bharti_table_MN').style.display = 'table-row';
+	}
+	else
+	{
+		document.getElementById('Bharti_table_DC').style.display = 'none';
+		document.getElementById('Bharti_table_MN').style.display = 'none';
+	}
+}
+function GetLanguageDesc(Name)
+{
+    return DevInfoDes[Name];
+}
+
+
+function FormatDigit(Number)
+{
+	if (Number < 10)
+	{
+		return ('0' + Number);
+	}
+	else
+	{
+		return Number;
+	}
+}
+
+
+
+</script>
+</head>
+<script language="javascript">
+infopagehead = '<body class="mainbodynoauth" onLoad="LoadFrame();">'; 
+document.write(infopagehead);
+</script>
+
+
+<table id="ont_device_info">
+    <tr> 
+        <td class="tabal_head" colspan="11">ONT Deviceinfo</td>
+    </tr>
+</table>
+<table id="optic_status_table" name="optic_status_table" width="100%" border="0" cellpadding="0" cellspacing="1" class="tabal_bg" style="table-layout:fixed; word-break:break-all">
+  <tr > 
+    <td class="table_right" style="font-weight:bold">Item</td>
+    <td class="table_right" style="font-weight:bold">Current Value</td>
+    <td class="table_right" style="font-weight:bold">Reference Value</td>
+  </tr >
+  <tr id="Bharti_table_DC" style="display:none;">
+    <td class="table_title" style="font-weight:bold;">Type</td>
+    <td class="table_right">Dual Band CPE</td>
+    <td class="table_right">Dual Band CPE</td>
+  </tr >
+  <tr id="Bharti_table_MN" style="display:none;">
+ 
+    <td class="table_title" style="font-weight:bold;">Model No</td>
+    <td class="table_right"><script>document.write('<div id="PortalProductName">' + ProductName + '</div>');</script></td>
+    <td class="table_right"><script>document.write('<div id="PortalProductName">' + ProductName + '</div>');</script></td>
+  </tr >
+  <tr > 
+    <td class="table_title" style="font-weight:bold">OUI-SN</td>
+    <td class="table_right">
+		<script language="javascript">
+			if (ontPonMode.toUpperCase() == 'GPON')
+			{
+				document.write(deviceInfo.ManufacturerOUI + '-' + deviceInfo.SerialNumber);
+			}
+			else if (ontPonMode.toUpperCase() == 'EPON')
+			{
+				document.write(deviceInfo.ManufacturerOUI + '-' + deviceInfo.Mac);
+			}
+		</script>
+	</td>
+    <td class="table_right">-</td>
+  </tr >
+  <tr> 
+	<td class="table_title" id="td7_1" style="font-weight:bold">ONT Registration status</td> 
+	<td class="table_right" id="td7_2"> 
+		<script type="text/javascript" language="javascript">
+			if (ontPonMode.toUpperCase() == 'GPON')
+			{   
+				if (ontInfo.Status == 'o1' || ontInfo.Status == 'O1')
+				{
+					document.write(ontInfo.Status + DevInfoDes['s1322']); 
+				}
+				else if (ontInfo.Status == 'o2' || ontInfo.Status == 'O2')
+				{
+					document.write(ontInfo.Status + DevInfoDes['s1323']); 
+				}
+				else if (ontInfo.Status == 'o3' || ontInfo.Status == 'O3')
+				{
+					document.write(ontInfo.Status+DevInfoDes['s1324']); 
+				}
+				else if (ontInfo.Status == 'o4' || ontInfo.Status == 'O4')
+				{
+					document.write(ontInfo.Status+DevInfoDes['s1325']); 
+				}
+				else if (ontInfo.Status == 'o5' || ontInfo.Status == 'O5')
+				{
+					document.write(ontInfo.Status+DevInfoDes['s1326']); 
+				}
+				else if (ontInfo.Status == 'o6' || ontInfo.Status == 'O6')
+				{
+					document.write(ontInfo.Status+DevInfoDes['s1327']); 
+				}
+				else if (ontInfo.Status == 'o7' || ontInfo.Status == 'O7')
+				{
+					document.write(ontInfo.Status+DevInfoDes['s1328']); 
+				}
+			}
+			else if (ontPonMode.toUpperCase() == 'EPON')
+			{
+				if (ontEPONInfo != null)
+				{
+					document.write(ontEPONInfo.Status);
+				}
+				else
+				{
+					document.write('');
+				}
+			}
+			else
+			{
+				document.write('');
+			}
+		</script> 
+	</td> 
+	<td class="table_right">
+		<script type="text/javascript" language="javascript">
+			document.write('O5(Operation state)');	
+		</script> 
+	</td>
+</tr> 
+ <tr> 
+    <td class="width_33p table_title" style="font-weight:bold">TX Optical Power</td>
+    <td class="table_right"> <script language="javascript" type="text/javascript">
+                  if(opticInfo == null)
+    			  {
+    			  	document.write(status_optinfo_language['amp_optic_unknown']);
+    			  }
+    			  else
+    			  {
+    				document.write(opticInfo.transOpticPower+' dBm');
+    			  }
+			    </script> </td>
+    <td class="table_right">0.5 to 5 dBm</td>
+  </tr>
+  <tr > 
+    <td class="width_33p table_title" style="font-weight:bold">RX Optical Power</td>
+    <td class="table_right"> <script language="javascript" type="text/javascript">
+				  if(opticInfo == null)
+				  {
+				  	document.write(status_optinfo_language['amp_optic_unknown']);
+				  }
+				  else
+				  {
+					document.write(opticInfo.revOpticPower+' dBm');
+				  }
+				</script> </td>
+    <td class="table_right">-27 to -8 dBm</td>
+  </tr>
+
+</table>
+</div> 
+</body>
+
+</html>

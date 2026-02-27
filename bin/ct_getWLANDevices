@@ -1,0 +1,93 @@
+#!/bin/sh
+
+# get wlan num
+wlannumpath="InternetGatewayDevice.LANDevice.1.WLANConfiguration."
+wlannumoutput=$(shellconfig $wlannumpath getinst|sed -n '2p'|awk '{print$NF}')
+
+for i in $(seq 1 $wlannumoutput)
+do
+    wlanconfigpath=$wlannumpath"$i."
+
+    #get ssid
+    ssidpath=$wlanconfigpath"SSID"
+    ssid=$(cwmp getvalue $ssidpath)
+    result=$(echo $ssid | grep "fail")
+    if [[ "$result" != "" ]]
+    then
+        continue
+    fi
+
+    ssidoutput=${ssid##*SSID=}
+    echo "SSID=$ssidoutput"
+
+    #get channel
+    channelpath=$wlanconfigpath"ChannelsInUse"
+    channel=$(cwmp getvalue $channelpath)
+    channeloutput=${channel##*ChannelsInUse=}
+
+    #get device num
+    devnumpath=$wlanconfigpath"AssociatedDevice"
+    devnum=$(shellconfig $devnumpath getinst|sed -n '2p'|awk '{print$NF}')
+
+    if [ $devnum == ":" ]
+    then
+        echo "WLAN_DEVICE_NUM=0"
+        echo "WLAN_DEVICE_NAMES="
+        echo "WLAN_DEVICE_REAL_FLOW="
+        echo "WLAN_DEVICE_REAL_SIGNAL_INTENSITY="
+        echo "WLAN_DEVICE_CHANNEL="
+    else
+        echo "WLAN_DEVICE_NUM=$devnum"
+        wlandevname="WLAN_DEVICE_NAMES="
+        wlandevrealflow="WLAN_DEVICE_REAL_FLOW="
+        wlandevRSSI="WLAN_DEVICE_REAL_SIGNAL_INTENSITY="
+        wlandevchannel="WLAN_DEVICE_CHANNEL="
+
+        for j in $(seq 1 $devnum)
+        do
+            assocdevpath=$wlanconfigpath"AssociatedDevice."$j"."
+
+            #get device name 
+            devnamepath=$assocdevpath"X_CT-COM_AssociatedDevicedescriptions"
+            devname=$(cwmp getvalue $devnamepath)
+            devnameoutput=${devname##*X_CT-COM_AssociatedDevicedescriptions=}
+            wlandevname=$wlandevname$devnameoutput
+
+            #get device real flow
+            bytesentpath=$assocdevpath"StaDeviceStats.BytesSentRate"
+            bytesent=$(cwmp getvalue $bytesentpath)
+            bytesentoutput=${bytesent##*BytesSentRate=}
+
+            bytereceivedpath=$assocdevpath"StaDeviceStats.BytesReceivedRate"
+            bytereceived=$(cwmp getvalue $bytereceivedpath)
+            bytereceivedoutput=${bytereceived##*BytesReceivedRate=}
+
+            wlandevrealflow=$wlandevrealflow$bytereceivedoutput","$bytesentoutput
+
+            #get device RSSI
+            devrssipath=$assocdevpath"X_HW_RSSI"
+            devrssi=$(cwmp getvalue $devrssipath)
+            devrssioutput=${devrssi##*X_HW_RSSI=}
+            wlandevRSSI=$wlandevRSSI$devrssioutput            
+
+            #get device channel
+            wlandevchannel=$wlandevchannel$channeloutput
+
+            if [ $j -ne $devnum ];then
+                wlandevname=$wlandevname","
+                wlandevrealflow=$wlandevrealflow"/"
+                wlandevRSSI=$wlandevRSSI"/"
+                wlandevchannel=$wlandevchannel"/"
+            fi
+        done
+        
+        echo $wlandevname
+        echo $wlandevrealflow
+        echo $wlandevRSSI
+        echo $wlandevchannel
+    fi
+
+    if [ $i -ne $wlannumoutput ];then
+        echo ""
+    fi
+done

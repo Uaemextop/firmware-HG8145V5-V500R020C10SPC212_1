@@ -1,0 +1,88 @@
+#! /bin/sh
+
+# 写入一个SSID的recover脚本，该脚本通过读取 /var/customizepara.txt 
+# 文件中的定制信息，来将定制信息写入ctree中
+#customize.sh COMMON_WIFI XXX SSID WPA密码
+# 定制脚本信息文件，该文件名固定，不能更改
+var_customize_file=/var/customizepara.txt
+
+# 定制信息写入文件，该文件通过tar包解压后复制产生,
+# recover脚本的写入操作都是在这个临时文件中进行
+var_default_ctree=/mnt/jffs2/customize_xml/hw_default_ctree.xml
+var_temp_ctree=/mnt/jffs2/customize_xml/hw_temp_ctree.xml
+var_pack_temp_dir=/bin/
+var_batch_file=/tmp/batch_file
+
+# check the customize file
+HW_Script_CheckFileExist()
+{
+	if [ ! -f "$var_customize_file" ] ;then
+	    echo "ERROR::customize file is not existed."
+            return 1
+	fi
+	return 0
+}
+
+# read data from customize file
+HW_Script_ReadDataFromFile()
+{
+	read -r var_webpwd1 var_webpwd2 < $var_customize_file
+	if [ 0 -ne $? ]
+	then
+	    echo "Failed to read spec info!"
+	    return 1
+	fi
+	return
+}
+
+# set customize data to file
+HW_Script_SetDatToFile()
+{
+	var_web_pwd1_node=InternetGatewayDevice.UserInterface.X_HW_WebUserInfo.X_HW_WebUserInfoInstance.1
+	var_web_pwd2_node=InternetGatewayDevice.UserInterface.X_HW_WebUserInfo.X_HW_WebUserInfoInstance.2
+	
+	# decrypt var_default_ctre
+	$var_pack_temp_dir/aescrypt2 1 $var_default_ctree $var_temp_ctree
+	mv -f $var_default_ctree $var_default_ctree".gz"
+	gunzip -f $var_default_ctree".gz"
+	
+    rm -rf $var_batch_file
+    
+	#set web common pwd	
+	echo "set $var_web_pwd1_node Password $var_webpwd1" >> $var_batch_file
+	
+	#set web admin pwd
+	echo "set $var_web_pwd2_node Password $var_webpwd2" >> $var_batch_file
+		
+	cfgtool batch $var_default_ctree $var_batch_file
+	if [ 0 -ne $? ]
+	then
+	    echo "set spec info Fail!"
+	    return 1
+	fi
+	
+	rm -rf $var_batch_file
+
+	#encrypt var_default_ctree
+	gzip -f $var_default_ctree
+	mv -f $var_default_ctree".gz" $var_default_ctree
+	$var_pack_temp_dir/aescrypt2 0 $var_default_ctree $var_temp_ctree	
+	return
+}
+
+#
+HW_Script_CheckFileExist
+[ ! $? == 0 ] && exit 1
+
+#
+HW_Script_ReadDataFromFile
+[ ! $? == 0 ] && exit 1
+
+#
+HW_Script_SetDatToFile
+[ ! $? == 0 ] && exit 1
+
+echo "set spec info OK!"
+
+exit 0
+

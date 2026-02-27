@@ -1,0 +1,30 @@
+<InternetGatewayDevice>
+    <WANDevice>
+        <WANConnectionDevice addconfig = "0x00000006" setconfig = "0x00000006" getconfig = "0x00000006">
+            <WANIPConnection setconfig = "0x00000006" addconfig = "0x00000006" delconfig = "0x00000006" getconfig = "0x00000006">
+                <X_HW_DDNSConfiguration setconfig = "0x00000006" addconfig = "0x00000006" delconfig = "0x00000006" getconfig = "0x00000006">
+                    <DDNSCfgEnabled setconfig = "0x00000006" getconfig = "0x00000006"/>
+                    <DDNSProvider setconfig = "0x00000006" getconfig = "0x00000006"/>
+                    <DDNSUsername setconfig = "0x00000006" getconfig = "0x00000006"/>
+                    <DDNSPassword setconfig = "0x00000006" getconfig = "0x00000006"/>
+                    <ServicePort setconfig = "0x00000006" getconfig = "0x00000006"/>
+                    <DDNSDomainName setconfig = "0x00000006" getconfig = "0x00000006"/>
+                    <DDNSHostName setconfig = "0x00000006" getconfig = "0x00000006"/>
+                    <SaltAddress setconfig = "0x00000006" getconfig = "0x00000006"/>
+                </X_HW_DDNSConfiguration>
+            </WANIPConnection>
+            <WANPPPConnection setconfig = "0x00000006" addconfig = "0x00000006" delconfig = "0x00000006" getconfig = "0x00000006">
+                <X_HW_DDNSConfiguration setconfig = "0x00000006" addconfig = "0x00000006" delconfig = "0x00000006" getconfig = "0x00000006">
+                    <DDNSCfgEnabled setconfig = "0x00000006" getconfig = "0x00000006"/>
+                    <DDNSProvider setconfig = "0x00000006" getconfig = "0x00000006"/>
+                    <DDNSUsername setconfig = "0x00000006" getconfig = "0x00000006"/>
+                    <DDNSPassword setconfig = "0x00000006" getconfig = "0x00000006"/>
+                    <ServicePort setconfig = "0x00000006" getconfig = "0x00000006"/>
+                    <DDNSDomainName setconfig = "0x00000006" getconfig = "0x00000006"/>
+                    <DDNSHostName setconfig = "0x00000006" getconfig = "0x00000006"/>
+                    <SaltAddress setconfig = "0x00000006" getconfig = "0x00000006"/>
+                </X_HW_DDNSConfiguration>
+            </WANPPPConnection>
+        </WANConnectionDevice>
+    </WANDevice>
+</InternetGatewayDevice>

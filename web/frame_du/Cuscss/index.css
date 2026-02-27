@@ -1,0 +1,237 @@
+@font-face{
+	font-family:'DuCoHeadline';
+	src:url('../fonts/DuCoHeadline400.woff')format('woff');
+
+}
+
+
+div#main {
+	width: 1030px;
+	margin: 0px auto;
+}
+div#main div#header {
+	height: 76px;
+	border-right: 1px solid #ccc;
+}
+div#main div#header div#headerLogoImg {
+	float: left;
+	height: 70px;
+	width: 250px;
+	background: url('../images/banner_logo_du.gif') no-repeat center;
+}
+div#main div#header div#headerContent {
+	float: left;
+	height: 70px;
+	width: 778px;
+	background-color: #ffffff;
+}
+div#main div#header div#headerContent div#headerInfo {
+	height: 45px;
+	margin-left: 8px;
+}
+div#main div#header div#headerContent div#headerInfo div {
+	float: left;
+	width: 300px;
+	height: 45px;
+	line-height: 45px;
+	font-family:"DuCoHeadline";
+}
+div#main div#header div#headerContent div#headerInfo div#headerTitle {
+	color: #0099cc;
+	text-align: left;
+	font-size: 25px;
+	font-weight: bold;
+}
+div#main div#header div#headerContent div#headerInfo div#headerLogout {
+	text-align: right;
+	font-size: 12px;
+}
+div#main div#header div#headerContent div#headerInfo div#headerLogout span {
+	margin-right: -150px;
+	cursor: pointer;
+	color: #0099cc;
+	font-weight: bold;
+}
+div#main div#header div#headerContent div#headerTab {
+	height: 25px;
+	clear: both;
+	line-height: 25px;
+	margin-left:10px;
+	width:780px;
+	font-family:"DuCoHeadline";
+	font-size: 11px;
+}
+div#main div#header div#headerContent div#headerTab ul {
+	padding: 0px;
+	margin: 0px;
+	list-style-type: none;
+	margin-left: -10px;
+}
+div#main div#header div#headerContent div#headerTab ul li {
+	height: 25px;
+	float: left;
+	cursor: pointer;
+	font-weight: bold;
+}
+div#main div#header div#headerContent div#headerTab ul li div {
+	float: left;
+}
+div#main div#header div#headerContent div#headerTab ul li div.tabBtnLeft {
+	width: 5px;
+	height: 25px;
+	clear: both;
+}
+div#main div#header div#headerContent div#headerTab ul li div.tabBtnCenter {
+	height: 25px;
+	color: #0099cc;
+}
+div#main div#header div#headerContent div#headerTab ul li div.tabBtnRight {
+	width: 5px;
+	height: 25px;
+}
+div#main div#header div#headerContent div#headerTab ul li.hover div.tabBtnLeft {
+	width: 10px;
+	height: 25px;
+	clear: both;
+	background-image: url(../images/menuSide_du.gif);
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+}
+div#main div#header div#headerContent div#headerTab ul li.hover div.tabBtnCenter {
+	height: 25px;
+	color: #FFFFFF;
+	background-image: url(../images/menuBg_du.gif);
+	background-repeat: repeat-x;
+}
+div#main div#header div#headerContent div#headerTab ul li.hover div.tabBtnRight {
+	width: 10px;
+	height: 25px;
+	background-image: url(../images/menuSide_du.gif);
+	background-repeat: no-repeat;
+	background-position: -10px 0px;
+}
+div#main div#header div#headerSpace {
+	height: 5px;
+	clear: both;
+	line-height: 6px;
+	background-color: #0099cc;
+	width: 250px;
+	border-bottom: 1px solid #80b9d0;
+}
+div#main div#center {
+	height: 545px;
+}
+div#main div#center div#nav {
+	width: 250px;
+	height: 545px;
+	float: left;
+	background-color: #0099cc;
+	font-family:"DuCoHeadline";
+	font-size: 12px;
+}
+div#main div#center div#nav ul {
+	padding: 0px;
+	margin: 0px;
+	list-style-type: none;
+}
+div#main div#center div#nav ul li div {
+	width: 240px;
+	height: 25px;
+	cursor: pointer;
+	line-height: 25px;
+	font-weight: bold;
+	padding-left: 10px;
+}
+div#main div#center div#nav.orangement
+{
+	background-color:#FFFFFF;
+}
+
+div#nav li {
+    border-bottom: 1px solid #80b9d0;
+}
+
+div#main div#center div#nav.orangement ul li div
+{
+	color:#F47A04;
+}
+div#main div#center div#nav.others ul li div
+{
+	color:#ffffff;
+	background-color:#0099CC;
+}
+div#main div#center div#nav ul li.hover div {
+	color: #0099cc;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #ffffff;
+}
+div#main div#center div#content {
+	float: left;
+	width: 780px;
+	height: 545px;
+	background-color: #D3D3D3;
+}
+div#main div#center div#content div#topNav {
+	height: 25px;
+	color: #000000;
+	line-height: 25px;
+	padding-left: 10px;
+	background-color: #efefef;
+	font-family:"DuCoHeadline";
+	font-size: 12px;
+}
+div#main div#center div#content div#frameWarpContent {
+	height: 520px;
+}
+
+div#main div#footer {
+	clear: both;
+	color: #434343;
+	text-align: center;
+	background-color: #E2E2E2;
+}
+div#main table {
+	height: 100%;
+	margin: 0px auto;
+}
+div#main div#footer #footerLogo {
+	height: 25px;
+	width: 40px;
+    background: url(../images/hw_logo.gif) no-repeat center;
+}
+div#main div#footer #footerText {
+	height: 25px;
+	color: #434343;
+	font-size: 12px;
+}
+div#main div#footer  #footer2DCode {
+	height: 70px;
+	width: 70px;
+}
+div#main div#footer #appdes {
+	height: 25px;
+	color: #434343;
+	font-size: 12px;
+}
+div#main div#fresh {
+	display: none;
+}
+
+body {
+	margin: 0px;
+	padding: 0px;
+}
+input.inputText {
+	height: 21px;
+	width: 180px;
+	border: 0px;
+	font-size: 12px;
+	font-family:"DuCoHeadline";
+	background: url('../images/login_inupt.gif') transparent no-repeat center;
+}
+input.button {
+	height: 21px;
+	border: 1px solid #C8C8C8;
+	background: url('../images/button_bg.gif') transparent repeat-x center;
+}

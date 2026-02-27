@@ -1,0 +1,18 @@
+#!/bin/sh
+
+lannumline=$(cwmp getvalue InternetGatewayDevice.LANDevice.1.LANEthernetInterfaceNumberOfEntries)
+lannum=${lannumline##*LANEthernetInterfaceNumberOfEntries=}
+	for i in $(seq 1 $lannum)
+    do
+	lanconfig=$(cwmp getvalue InternetGatewayDevice.LANDevice.1.LANEthernetInterfaceConfig.${i}.)
+	lanstatusline=`echo "$lanconfig" | sed -n '/\.Status=/p'`
+	lanstatus=${lanstatusline##*Status=}
+	if [ $lanstatus = "NoLink" ] ; then 
+		lanspeed="NOLINK"
+	else
+	lanspeedline=`echo "$lanconfig" | sed -n '/\.MaxBitRate=/p'`
+	lanspeed=${lanspeedline##*MaxBitRate=}
+	fi
+	lanspeedout=$lanspeedout"/"$lanspeed
+	done
+echo "LAN_SPEED="${lanspeedout:1}

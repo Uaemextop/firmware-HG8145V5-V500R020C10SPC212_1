@@ -1,0 +1,3 @@
+#! /bin/sh
+
+cat /proc/wap_proc/chip_attr | grep chip_des

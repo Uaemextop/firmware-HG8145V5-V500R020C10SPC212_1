@@ -1,0 +1,28 @@
+<InternetGatewayDevice>
+    <X_HW_Security setconfig = "0x00000007" addconfig = "0x00000007" delconfig = "0x00000007" getconfig = "0x00000007">
+        <AclServices setconfig = "0x00000007" addconfig = "0x00000007" delconfig = "0x00000007" getconfig = "0x00000007">
+            <AccessControl setconfig = "0x00000007" addconfig = "0x00000007" delconfig = "0x00000007" getconfig = "0x00000007">
+                <AccessControlListEnable setconfig = "0x00000007" getconfig = "0x00000007"/>
+                <List setconfig = "0x00000007" addconfig = "0x00000007" delconfig = "0x00000007" getconfig = "0x00000007">
+                    <SrcPortType setconfig = "0x00000007" getconfig = "0x00000007"/>
+                    <SrcPortName setconfig = "0x00000007" getconfig = "0x00000007"/>
+                    <SrcIp setconfig = "0x00000007" getconfig = "0x00000007"/>
+                    <ServicePort setconfig = "0x00000007" getconfig = "0x00000007"/>
+                    <SrcMac setconfig = "0x00000007" getconfig = "0x00000007"/>
+                    <ServiceProto setconfig = "0x00000007" getconfig = "0x00000007"/>
+                    <ServiceProtoPort setconfig = "0x00000007" getconfig = "0x00000007"/>
+                    <Priority setconfig = "0x00000007" getconfig = "0x00000007"/>
+                    <Mode setconfig = "0x00000007" getconfig = "0x00000007"/>
+                </List>
+            </AccessControl>
+        </AclServices>
+    </X_HW_Security>
+    <X_HW_APService setconfig = "0x00000007" getconfig = "0x00000007">
+        <IPTVUpPort setconfig = "0x00000007" getconfig = "0x00000007"/>
+    </X_HW_APService>
+    <UserInterface setconfig = "0x00000007" addconfig = "0x00000007" delconfig = "0x00000007" getconfig = "0x00000007">
+        <X_HW_CLIUserInfo setconfig = "0x00000007" addconfig = "0x00000007" delconfig = "0x00000007" getconfig = "0x00000007">
+            <Userpassword setconfig = "0x00000007" getconfig = "0x00000007"/>
+        </X_HW_CLIUserInfo>
+    </UserInterface>
+</InternetGatewayDevice> 

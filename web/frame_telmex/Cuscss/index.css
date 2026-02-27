@@ -1,0 +1,246 @@
+﻿div#main {
+	width: 955px;
+	margin: 0px auto;
+}
+
+div#main div#header {
+	height: 76px;
+}
+div#main div#header div#headerLogoImg {
+	float: left;
+	height: 70px;
+	width: 144px;
+	text-align: center;
+	background: url('../images/banner_bg.gif') repeat-x center;
+}
+
+div#main div#header div#headerLogoImg div#ImageTelmex {
+	margin-top: 14px;
+	border: none;
+}
+
+div#main div#header div#headerLogoImg div#ImageTelmex span {
+	margin-top: 10px;
+	border: none;
+}
+
+div#main div#header div#headerContent {
+	float: left;
+	height: 70px;
+	width: 811px;
+	background: url('../images/banner_bg.gif') repeat-x center;
+}
+div#main div#header div#headerContent div#headerInfo {
+	height: 45px;
+}
+div#main div#header div#headerContent div#headerInfo div {
+	float: left;
+	width: 405px;
+	height: 45px;
+	line-height: 45px;
+	font-family: Tahoma;
+}
+div#main div#header div#headerContent div#headerInfo div#headerTitle {
+	width: 400px;
+	color: #505050;
+	text-align: left;
+	font-size: 25px;
+	font-weight: bold;
+}
+div#main div#header div#headerContent div#headerInfo div#HerfTelmex {
+	width: 300px;
+	text-align: right;
+	font-size: 12px;
+}
+div#main div#header div#headerContent div#headerInfo div#HerfTelmex span {
+	margin-right: 20px;
+	cursor: pointer;
+	color: #000000;
+	font-weight: bold;
+}
+div#main div#header div#headerContent div#headerInfo div#headerLogout {
+	width: 110px;
+	text-align: right;
+	font-size: 12px;
+}
+div#main div#header div#headerContent div#headerInfo div#headerLogout span {
+	margin-right: 10px;
+	cursor: pointer;
+	color: #000000;
+	font-weight: bold;
+}
+div#main div#header div#headerContent div#headerTab {
+	height: 25px;
+	clear: both;
+	line-height: 25px;
+}
+div#main div#header div#headerContent div#headerTab ul {
+	padding: 0px;
+	margin: 0px;
+	list-style-type: none;
+}
+div#main div#header div#headerContent div#headerTab ul li {
+	height: 25px;
+	float: left;
+	cursor: pointer;
+	font-weight: bold;
+	margin: 0px 3px;
+}
+div#main div#header div#headerContent div#headerTab ul li div {
+	float: left;
+}
+div#main div#header div#headerContent div#headerTab ul li div.tabBtnLeft {
+	width: 5px;
+	height: 25px;
+	clear: both;
+}
+div#main div#header div#headerContent div#headerTab ul li div.tabBtnCenter {
+	height: 25px;
+	color: #000000;
+}
+div#main div#header div#headerContent div#headerTab ul li div.tabBtnRight {
+	width: 5px;
+	height: 25px;
+}
+div#main div#header div#headerContent div#headerTab ul li.hover div.tabBtnLeft {
+	width: 10px;
+	height: 25px;
+	clear: both;
+	background-image: url(../images/menuSide.gif);
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+}
+div#main div#header div#headerContent div#headerTab ul li.hover div.tabBtnCenter {
+	height: 25px;
+	color: #FFFFFF;
+	background-image: url(../images/menuBg.gif);
+	background-repeat: repeat-x;
+}
+div#main div#header div#headerContent div#headerTab ul li.hover div.tabBtnRight {
+	width: 10px;
+	height: 25px;
+	background-image: url(../images/menuSide.gif);
+	background-repeat: no-repeat;
+	background-position: -10px 0px;
+}
+div#main div#header div#headerSpace {
+	height: 6px;
+	clear: both;
+	line-height: 6px;
+	background-color: #990000;
+}
+
+div#main div#center {
+	height: 520px;
+}
+div#main div#center div#nav {
+	width: 230px;
+	height: 545px;
+	float: left;
+	background-color: #F6F6F6;
+}
+div#main div#center div#nav ul {
+	padding: 0px;
+	margin: 0px;
+	list-style-type: none;
+}
+div#main div#center div#nav ul li div {
+	width: 220px;
+	height: 25px;
+	color: #FFFFFF;
+	cursor: pointer;
+	line-height: 25px;
+	font-weight: bold;
+	margin-bottom: 1px;
+	padding-left: 10px;
+	background-color: #646464;
+}
+div#main div#center div#nav ul li.hover div {
+	color: #990000;
+	font-weight: bold;
+	cursor: pointer;
+	background-color: #D3D3D3;
+}
+div#main div#center div#content {
+	float: left;
+	width: 725px;
+	height: 545px;
+	background-color: #D3D3D3;
+}
+div#main div#center div#content div#topNav {
+	height: 25px;
+	color: #000000;
+	line-height: 25px;
+	padding-left: 10px;
+	background-color: #B7B7B7;
+}
+div#main div#center div#content div#frameWarpContent {
+	height: 550px;
+}
+
+div#main div#footer {
+	clear: both;
+	height: 25px;
+	color: #434343;
+	text-align: center;
+	background-color: #E2E2E2;
+}
+div#main table {
+	height: 100%;
+	margin: 0px auto;
+}
+div#main div#footer #footerLogo {
+	height: 25px;
+	width: 40px;
+    background: url(../images/hw_logo.gif) no-repeat center;
+}
+div#main div#footer #footerText {
+	color: #434343;
+	font-size: 12px;
+}
+
+div#main div#fresh {
+	display: none;
+}
+
+.div_ontstatus{
+	color: #990000;
+	line-height: 25px;
+	font-weight: bold;
+	margin-bottom: 1px;
+	padding-left: 10px;
+	background-color: #D3D3D3;
+	position:absolute;
+	width:220px;
+	top:520px;
+}
+.li_ontstatus{
+	color: #FF0000;
+}
+.div_subdiv{
+	height:20;
+	background-color: #F6F6F6;
+}
+
+* {
+	font-family: Arial;
+	font-size: 12px;
+	color: #000000;
+}
+body {
+	margin: 0px;
+	padding: 0px;
+}
+input.inputText {
+	height: 21px;
+	width: 180px;
+	border: 0px;
+	font-size: 12px;
+	font-family: Tahoma;
+	background: url('../images/login_inupt.gif') transparent no-repeat center;
+}
+input.button {
+	height: 21px;
+	border: 1px solid #C8C8C8;
+	background: url('../images/button_bg.gif') transparent repeat-x center;
+}
