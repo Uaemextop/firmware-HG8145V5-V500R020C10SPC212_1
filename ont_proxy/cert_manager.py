@@ -117,15 +117,19 @@ def ensure_certificates():
     return ca_key, ca_cert
 
 
+def _sanitize_path_for_ps(path_str):
+    return path_str.replace("'", "''")
+
+
 def install_ca_cert_windows():
-    cert_path = str(config.CA_CERT_FILE.resolve())
+    cert_path = _sanitize_path_for_ps(str(config.CA_CERT_FILE.resolve()))
     ps_script = (
-        f'$cert = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2("{cert_path}"); '
-        f'$store = New-Object System.Security.Cryptography.X509Certificates.X509Store("Root", "LocalMachine"); '
-        f'$store.Open("ReadWrite"); '
-        f'$store.Add($cert); '
-        f'$store.Close(); '
-        f'Write-Host "CA certificate installed successfully"'
+        f"$cert = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2('{cert_path}'); "
+        f"$store = New-Object System.Security.Cryptography.X509Certificates.X509Store('Root', 'LocalMachine'); "
+        f"$store.Open('ReadWrite'); "
+        f"$store.Add($cert); "
+        f"$store.Close(); "
+        f"Write-Host 'CA certificate installed successfully'"
     )
 
     if sys.platform != "win32":

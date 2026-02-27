@@ -21,6 +21,12 @@ class TrafficLogger:
         self._fh = open(config.TRAFFIC_LOG_FILE, "a", encoding="utf-8")
         self._lock = threading.Lock()
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *args):
+        self.close()
+
     def log(self, direction, method, path, status=None, body_preview=None, headers=None):
         ts = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
         parts = [f"[{ts}] {direction} {method} {path}"]
