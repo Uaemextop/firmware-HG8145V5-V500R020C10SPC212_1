@@ -9,3 +9,10 @@ Thumbs.db
 __pycache__/
 *.pyc
 *.pyo
+.venv/
+*.pem
+*.crt
+*.key
+ont_proxy/certs/
+ont_proxy/logs/
+ont_proxy/proxy.pac
