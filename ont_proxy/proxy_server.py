@@ -193,6 +193,7 @@ class ONTProxyHandler(http.server.BaseHTTPRequestHandler):
         self.end_headers()
 
         ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+        ssl_context.minimum_version = ssl.TLSVersion.TLSv1_2
         ssl_context.load_cert_chain(str(config.SERVER_CERT_FILE), str(config.SERVER_KEY_FILE))
 
         try:
@@ -222,6 +223,7 @@ def start_proxy(use_ssl=False):
 
     if use_ssl and config.SERVER_CERT_FILE.exists():
         ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+        ssl_context.minimum_version = ssl.TLSVersion.TLSv1_2
         ssl_context.load_cert_chain(str(config.SERVER_CERT_FILE), str(config.SERVER_KEY_FILE))
         server.socket = ssl_context.wrap_socket(server.socket, server_side=True)
 
